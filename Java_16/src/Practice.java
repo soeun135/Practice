@@ -18,6 +18,7 @@ public class Practice {
 
 
         // 람다식으로 작성
-
+        CompareTool cTool2 = (x,y)-> { return x > y ? x : y ;};
+        System.out.println(cTool2.getMaxNum(50,60));
     }
 }
