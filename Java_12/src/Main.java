@@ -7,7 +7,7 @@ class Outer{
     }
     class Inner{
         public void innerPrint(){
-            Outer.print();
+            Outer.this.print();
         }
     }
 
