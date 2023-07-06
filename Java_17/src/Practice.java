@@ -1,7 +1,9 @@
 // Practice
 // 하기 예제를 스트림으로 구현해보세요.
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Practice {
     public static void main(String[] args) {
@@ -19,7 +21,7 @@ public class Practice {
 
 
         // 스트림으로 구현
-
-
+        int sum2 = IntStream.range(1,11).filter(n -> n % 2 ==0).sum();
+        System.out.println("sum2 = " + sum2);
     }
 }

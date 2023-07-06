@@ -29,7 +29,8 @@ public class Main {
         }
 
         System.out.println("== to Stream ==");
-
+        Stream stream1 = Arrays.stream(arr); //String배열이 Stream으로 변환됨.
+        stream1.forEach(System.out::println);
 
 //      1-2. 컬렉션 스트림
         System.out.println("== 컬렉션 스트림 ==");
@@ -37,17 +38,19 @@ public class Main {
         System.out.println("list1 = " + list1);
 
         System.out.println("== to Stream ==");
-
+        Stream stream2 = list1.stream();
+//        stream2.forEach(System.out::println);
+        stream2.forEach(num -> System.out.println("num = "+num));
 
 //      1-3. 스트림 builder
         System.out.println("== 스트림 builder ==");
-
-
+        Stream streamBuilder = Stream.builder().add("a").add("b").build();
+        streamBuilder.forEach(System.out::println);
 
 //      1-4. 스트림 generate
         System.out.println("== 스트림 generate ==");
-
-
+        Stream streamGenerate = Stream.generate( () -> "456").limit(5);
+        streamGenerate.forEach(System.out::println);
 
 //      1-5. 스트림 iterate
         System.out.println("== 스트림 iterate ==");
