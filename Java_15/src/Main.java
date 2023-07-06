@@ -23,19 +23,55 @@ public class Main {
 
 //      1-2. LinkedList
         System.out.println("== LinkedList ==");
+        LinkedList list2 = new LinkedList();
+        list2.add(1);
+        list2.add(2);
+        list2.add(3);
+        System.out.println("list2 = " + list2);
+        list2.addFirst(10);
+        list2.addLast(28);
+        System.out.println("list2 = " + list2);
 
-
+        list2.remove();
+        System.out.println(list2);
 
 //      2. Set
 //      2-1. HashSet
         System.out.println("== HashSet ==");
-
-
+        HashSet set = new HashSet();
+        set.add(1);
+        set.add(2);
+        set.add(3);
+        System.out.println(set);
+        set.remove(3);
+        System.out.println(set);
+        set.add(2);
+        set.add(3);
+        System.out.println(set);
+        System.out.println(set.size());
+        System.out.println(set.contains(2));
+        
 //      2-2. TreeSet
         System.out.println("== TreeSet ==");
-
-
-
+        TreeSet set2 = new TreeSet();
+        set2.add(10);
+        set2.add(2334);
+        set2.add(3);
+        System.out.println("set2 = " + set2);
+        set2.remove(2);
+        System.out.println("set2 = " + set2);
+        set2.clear();
+        System.out.println("set2 = " + set2);
+        set2.add(10);
+        set2.add(5);
+        set2.add(15);
+        set2.add(15);
+        System.out.println("set2 = " + set2);
+        System.out.println(set2.first());
+        System.out.println(set2.last());
+        System.out.println(set2.lower(15));
+        System.out.println(set2.higher(5));
+        
 //      3. Map
 //      3-1. HashMap
         System.out.println("== HashMap ==");
@@ -52,7 +88,18 @@ public class Main {
 
 //      3-2. TreeMap
         System.out.println("== TreeMap ==");
+        TreeMap map2 = new TreeMap();
+        map2.put(10,"kiwi");
+        map2.put(20,"Apple");
+        map2.put(30,"strawberry");
+        System.out.println("map2 = " + map2);
 
+        System.out.println(map2.firstKey());
+        System.out.println(map2.firstEntry());
+        System.out.println(map2.lastKey());
+        System.out.println(map2.lastEntry());
+        System.out.println(map2.lowerEntry(30));
+        System.out.println(map2.higherEntry(10));
 
     }
 }
