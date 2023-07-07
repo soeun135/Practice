@@ -21,7 +21,6 @@ public class Practice {
 
 
         // 스트림으로 구현
-        int sum2 = IntStream.range(1,11).filter(n -> n % 2 ==0).sum();
-        System.out.println("sum2 = " + sum2);
+        System.out.println(IntStream.range(1,11).filter(n->n%2==0).sum());
     }
 }
