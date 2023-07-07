@@ -20,6 +20,7 @@ public class Practice5 {
             int x = right-left;
             int y = height[left] < height[right] ? height[left] : height[right];
             int curArea = x * y;
+            curArea = x * Math.min(height[left],height[right]);
             max= max < curArea?curArea:max;
 
             if(height[left] < height[right])
