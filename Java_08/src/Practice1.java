@@ -21,7 +21,9 @@ class Animal {
 class Cat extends Animal {
     String desc;
     Cat() {
-        this.desc = "고양이 입니다.";
+        //this.desc = "고양이 입니다.";
+        //super.desc = "고양이 입니다.";
+        super("고양잉이이이");
     }
 }
 
