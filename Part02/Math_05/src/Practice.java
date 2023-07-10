@@ -3,7 +3,14 @@
 
 public class Practice {
     void combination(int[] arr, boolean[] visited, int depth, int n, int r) {
+        if(depth == r){
+            System.out.println();
+        }
 
+        for (int i = 0; i < n; i++) {
+
+            visited[i] = true;
+        }
 
     }
     
