@@ -19,19 +19,39 @@ public class Main {
         int nAandB = 0;
         
         // 기본 풀이
+        for(int a : dice1){
+            for(int b:dice2){
+                if((a+b) % 3 == 0) nA ++;
+                if((a+b) % 4 ==0) nB++;
+                if((a+b) % 12 == 0) nAandB++;
+            }
+        }
+        System.out.println(nA+nB-nAandB);
 
-
-        
         // HashSet 이용
+        HashSet <ArrayList> set = new HashSet<>();
 
-
+        for(int a : dice1){
+            for(int b:dice2){
+                if((a+b) % 3 == 0 || (a+b) % 4 == 0){
+                    ArrayList list = new ArrayList(Arrays.asList(a,b));
+                    set.add(list);
+                }
+            }
+        }
+        System.out.println(set+" \n경우의 수 : "+set.size());
 
 //      2. 곱의 법칙
         System.out.println("== 곱의 법칙 ==");
 //      두 개의 주사위 a, b를 던졌을 때 a는 3의 배수, b는 4의 배수인 경우의 수
         nA = 0;
         nB = 0;
-
-
+        for(int a : dice1){
+            if(a % 3 == 0) nA++;
+        }
+        for(int b : dice2){
+            if(b % 4 == 0) nB++;
+        }
+        System.out.println("곱 :"+nA*nB);
     }
 }
