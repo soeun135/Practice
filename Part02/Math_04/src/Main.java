@@ -25,7 +25,7 @@ public class Main {
         n=5;
         int r=3;
         result = 1;
-        for (int i = n; i < n - r + 1; i++) {
+        for (int i = n; i >= n - r + 1; i--) {
             result *= i;
         }
         System.out.println(result);
