@@ -78,7 +78,7 @@ class MySet {
 public class Practice {
     public static void main(String[] args) {
 
-//      Test code
+//      Test code HashSet이용하지 않고
         MySet a = new MySet();
 
         a.add(1);

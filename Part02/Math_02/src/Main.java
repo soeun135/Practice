@@ -7,7 +7,7 @@ import java.util.HashSet;
 public class Main {
     public static void main(String[] args) {
 
-//      1. 자바에서 집합 사용 - HashSet
+//      1. 자바에서 집합 사용 - HashSet 이용
         System.out.println("== HashSet ==");
         HashSet set1 = new HashSet();
         set1.add(1);
