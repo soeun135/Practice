@@ -41,5 +41,7 @@ public class Practice1 {
         solution("XIII");
         solution("XXVI");
         solution("MCMXCIV");
+        solution("CXXXXV");
+
     }
 }
