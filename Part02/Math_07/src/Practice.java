@@ -2,7 +2,34 @@
 // 제곱과 제곱근을 Math 없이 구현하기
 
 public class Practice {
+    static double pow(int a, int b){
+        double result = 1;
+        boolean isMinus = false;
 
+        if(b == 0)
+            return 1;
+        else if(b < 0){
+            b *= -1;
+            isMinus = true;
+        }
+        for (int i = 0; i < b; i++) {
+            result *= a;
+        }
+
+        return isMinus ? 1 / result : result;
+    }
+
+    public double sqrt(int a){
+        double result = 1;
+
+        if(a == 0)
+            return 1;
+
+        for (int i = 0; i < ; i++) {
+
+        }
+        return result;
+    }
 
     public static void main(String[] args) {
 
@@ -13,9 +40,9 @@ public class Practice {
         System.out.println(Math.pow(-2, -3));
 
         System.out.println("== My pow ==");
-//        System.out.println(pow(2, 3));
-//        System.out.println(pow(2, -3));
-//        System.out.println(pow(-2, -3));
+        System.out.println(pow(2, 3));
+        System.out.println(pow(2, -3));
+        System.out.println(pow(-2, -3));
 
         System.out.println("== Math sqrt ==");
         System.out.println(Math.sqrt(16));
