@@ -4,10 +4,21 @@
 
 // 입출력 예시)
 // 배열 arr: 1, 1, 100, 1, 1, 1, 100
+// target : 100
 // 결과: 6
 
 public class Practice2 {
     public static void main(String[] args) {
-
+        int arr[] = {1,1,100,1,1,1,100};
+        int target = 100;
+        int idx = -1;
+        for (int i = 0; i < arr.length; i++) {
+            if( arr[i] == target){
+                if( i > idx) //이거 굳이 안 넣어줘도 될 거 같은데
+                    idx = i;
+            }
+        }
+        if( idx >= 0)
+            System.out.println(idx);
     }
 }

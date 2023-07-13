@@ -10,6 +10,17 @@ import java.util.Arrays;
 
 public class Practice3 {
     public static void main(String[] args) {
+        int arr[] = {1,3,5,7,9};
 
+        for (int i = 0; i < arr.length/2; i++) {
+            int tmp = arr[arr.length-1-i];
+            arr[arr.length-1-i] = arr[i];
+            arr[i] = tmp;
+        }
+        for(int x : arr){
+            System.out.print(x+" ");
+        }
+        //배열 요소 더 간단하게 출력하는 방법
+        System.out.println(Arrays.toString(arr));
     }
 }
