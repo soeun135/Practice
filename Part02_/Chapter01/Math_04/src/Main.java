@@ -49,6 +49,7 @@ public class Main {
 //      원 모양의 테이블에 3명을 앉히는 경우의 수
         n=3;
         result = 1;
+
         for (int i = 1; i < n; i++) {
             result *= i;
         }
