@@ -7,6 +7,8 @@ package P4;
 // 각 문자열의 첫 글자가 같은 것끼리 같은 연결 리스트로 관리하기
 
 
+import java.util.HashSet;
+
 class Node {
     String data;
     Node next;
@@ -103,7 +105,29 @@ class LinkedList {
 public class Practice4 {
 
     public static void dataCollect(String[] data) {
+        HashSet<Character> set = new HashSet();
 
+        for(String item: data){
+            set.add(item.toCharArray()[0]); //단어들의 첫 글자를 저장
+        }
+        System.out.println(set);
+
+        Character[] arr = set.toArray(new Character[0]);
+        LinkedList[] linkedList = new LinkedList[set.size()];//아직은 접근 불가. 연결리스트 배열을 위한 공간을 마련한 거지 객체생성은 안 했음
+        for (int i = 0; i < linkedList.length; i++) {
+            linkedList[i] = new LinkedList(null,arr[i]);
+        }
+        for(String item : data){
+            for(LinkedList list : linkedList){
+                if(list.alphabet == item.toCharArray()[0]){
+                    list.addData(item);
+                }
+            }
+        }
+        for(LinkedList list : linkedList){
+            System.out.println(list.alphabet + " : ");
+            list.showData();
+        }
     }
 
     public static void main(String[] args) {

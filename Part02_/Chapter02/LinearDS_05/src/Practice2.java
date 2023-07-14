@@ -16,7 +16,30 @@
 
 public class Practice2 {
     public static boolean checkPalindrome(LinkedList list) {
-        return false;
+        Node cur = list.head;
+        Node left = list.head;
+        Node right = null;
+
+        int cnt = 0;
+        while(cur != null){//right를 일단 끝 노드 가리키게 함
+            cnt ++; //리스트 안에 원소의 갯수
+            right = cur; //right를 제일 끝 노드가리키게 함
+            cur = cur.next;
+        }
+        Node prevRight = right;
+        for (int i = 0; i < cnt/2; i++) {
+            if(left.data != right.data){
+                return false;
+            }
+            left = left.next;
+            right = left;
+            while(right.next != prevRight){
+                System.out.println(right.data+" "+prevRight.data);
+                right = right.next;
+            }
+            prevRight = right; //왜 이게 없어도 되지 ?????!?!?!?!?
+        }
+        return true;
     }
 
     public static void main(String[] args) {
@@ -24,7 +47,9 @@ public class Practice2 {
         LinkedList linkedList = new LinkedList();
         linkedList.addData(1);
         linkedList.addData(3);
+        linkedList.addData(6);
         linkedList.addData(5);
+        linkedList.addData(6);
         linkedList.addData(3);
         linkedList.addData(1);
         System.out.println(checkPalindrome(linkedList));

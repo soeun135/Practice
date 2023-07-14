@@ -12,7 +12,28 @@
 
 public class Practice3 {
     public static LinkedList reverseList(LinkedList list, int left, int right) {
-        return null;
+        //연결정보들을 담기위한 변수
+        Node cur1 = null;
+        Node pre1 = null;
+
+        cur1 = list.head; //head부터 순환하며 특정 지점을 찝음
+        for (int i = 0; i < left - 1 ; i++) {
+            pre1 = cur1;
+            cur1 = cur1.next;
+        }
+        Node cur2 = cur1;
+        Node pre2 = pre1;
+        Node after = null;
+        for (int i = left; i <= right ; i++) {
+            after = cur2.next;
+            cur2.next = pre2;
+            pre2 = cur2;
+            cur2 = after;
+        }
+        pre1.next = pre2;
+        cur1.next = cur2;
+
+        return list;
     }
     
     public static void main(String[] args) {
