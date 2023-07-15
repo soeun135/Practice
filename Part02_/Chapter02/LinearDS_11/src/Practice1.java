@@ -8,9 +8,22 @@
 // 출력 데이터: 1 -> 5 -> 2 -> 4 -> 3
 
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 public class Practice1 {
     public static void reorderData(int[] arr) {
+        Deque deque = new LinkedList();
 
+        for(int i : arr){
+            deque.add(i);
+        }
+        while(!deque.isEmpty()){
+            System.out.print(deque.pollFirst()+" ");
+            if(deque.isEmpty()) break;
+            System.out.print(deque.pollLast()+" ");
+        }
+        System.out.println();
     }
 
     public static void main(String[] args) {

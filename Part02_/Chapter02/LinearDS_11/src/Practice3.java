@@ -49,7 +49,14 @@ class MyDeque {
     }
 
     public void addMiddle(int data) {
+        if (this.isFull()) {
+            System.out.println("Deque is full!");
+            return;
+        }
+        int middle = (this.front + this.rear) / 2;
+        for (int i = 0; i < middle; i++) {
 
+        }
     }
 
     public Integer removeFirst() {

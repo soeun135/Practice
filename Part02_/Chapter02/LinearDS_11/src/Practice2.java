@@ -14,8 +14,22 @@
 // 결과: false
 
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 public class Practice2 {
     public static boolean checkPalindrome(String str) {
+        Deque deque = new LinkedList();
+        for(String s : str.split("")){
+            deque.add(s);
+        }
+        if(deque.size() == 1) return true;
+        while(deque.size() > 1){
+            if(deque.pollFirst().equals(deque.pollLast())){
+                return true;
+            }
+        }
+
         return false;
     }
 
