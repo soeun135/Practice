@@ -15,16 +15,40 @@
 
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.stream.IntStream;
 
 public class Practice2 {
 
     public static ArrayList getJosephusPermutation(int N, int K) {
-        return null;
-    }
+        ArrayList list = new ArrayList();
+        Queue q = new LinkedList();
+        IntStream.range(1, N + 1).forEach(x -> q.add(x));
+
+        int cnt = 0;
+        while (!q.isEmpty()) {
+            for (int i = 0; i < K - 1; i++) {
+                q.add(q.poll());
+            }
+            list.add(q.poll());
+            //강사님 코드
+//            int data = (int)q.remove();
+//            cnt += 1;
+//            if(cnt % K == 0){
+//                list.add(data);
+//            }
+//            else{
+//                q.add(data);
+//            }
+            }
+            return list;
+        }
 
     public static void main(String[] args) {
         // Test code
         System.out.println(getJosephusPermutation(5, 2));
         System.out.println(getJosephusPermutation(7, 3));
+
     }
 }

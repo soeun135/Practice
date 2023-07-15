@@ -14,9 +14,23 @@
 // 결과: 6
 
 
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.stream.IntStream;
+
 public class Practice1 {
     public static int findLastCard(int N) {
-        return 0;
+        Queue q = new LinkedList();
+//        for (int i = 1; i <= N ; i++) {
+//            q.add(i);
+//        }
+        IntStream.range(1,N+1).forEach(x -> q.add(x));
+        while(q.size() > 1){
+            q.remove();
+            q.add(q.poll());
+        }
+
+        return (int)q.poll();
     }
 
     public static void main(String[] args) {
