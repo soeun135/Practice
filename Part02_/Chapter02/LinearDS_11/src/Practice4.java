@@ -3,6 +3,8 @@
 // 기본 데크 구조에서 데크 공간이 full 일 때 데이터를 추가하는 경우,
 // 데크 공간을 2배 씩 늘려주는 코드를 작성하세요.
 
+import java.util.ArrayList;
+
 class MyDeque2 {
     int[] arr;
     int front = 0;
@@ -21,13 +23,25 @@ class MyDeque2 {
     }
 
     public void increaseSize() {
+        int arrDup[] = this.arr.clone();
+        this.arr = new int[this.arr.length * 2];
+
+        int start = (this.front + 1) % arrDup.length;
+        int end = (this.rear + 1) % arrDup.length;
+        int idx = 1;
+
+        for (int i = start; i != end ; i = (i + 1) % arrDup.length) {
+            this.arr[idx++] = arrDup[i];
+        }
+        this.front = 0;
+        this.rear = idx - 1;
 
     }
 
     public void addFirst(int data) {
         if (this.isFull()) {
             System.out.println("Deque is full!");
-            return;
+            increaseSize();
         }
 
         this.arr[front] = data;
@@ -37,7 +51,7 @@ class MyDeque2 {
     public void addLast(int data) {
         if (this.isFull()) {
             System.out.println("Deque is full!");
-            return;
+            increaseSize();
         }
 
         this.rear = (this.rear + 1) % this.arr.length;
@@ -86,20 +100,20 @@ public class Practice4 {
         myDeque.addLast(3);
         myDeque.addLast(4);
         myDeque.addLast(5);
-        myDeque.printDeque();
+        myDeque.printDeque(); /// 1 2 3 4 5
 
         myDeque.addLast(6);
         myDeque.addLast(7);
         myDeque.addLast(8);
         myDeque.addLast(9);
         myDeque.addLast(10);
-        myDeque.printDeque();
+        myDeque.printDeque(); // 1 2 3 4 5 6 7 8 9 10
 
-        myDeque.removeLast();
-        myDeque.removeLast();
+        myDeque.removeLast(); // 10
+        myDeque.removeLast(); // 9
         myDeque.addFirst(100);
         myDeque.addFirst(200);
-        myDeque.printDeque();
+        myDeque.printDeque(); // 200 100 1 2 3 4 5 6 7 8
 
         myDeque.addFirst(300);
         myDeque.addFirst(400);

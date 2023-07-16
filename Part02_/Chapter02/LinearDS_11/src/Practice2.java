@@ -14,15 +14,31 @@
 // 결과: false
 
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
 
 public class Practice2 {
     public static boolean checkPalindrome(String str) {
-        Deque deque = new LinkedList();
+        Deque deque = new ArrayDeque();
+        //강사님 코드
+        boolean isFront = true;
+        boolean isPalindrome = true;
+
         for(String s : str.split("")){
             deque.add(s);
         }
+//        while(!deque.isEmpty()){
+//            String s1 = (String)deque.pollFirst(); //remove 써서 여기서 꺼냈을때 deque에 아무 것도 없으면 아랫 줄에서 에러가 발생해서 프로그램 종료됨.
+//            String s2 = (String)deque.pollLast();
+//
+//            if(s1 != null && s2 != null && !s1.equals(s2)){
+//                isPalindrome = false;
+//                break;
+//            }
+//        }
+
+        //내코드
         if(deque.size() == 1) return true;
         while(deque.size() > 1){
             if(deque.pollFirst().equals(deque.pollLast())){
