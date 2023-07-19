@@ -15,10 +15,22 @@
 
 
 import java.util.Arrays;
+import java.util.Hashtable;
 
 public class Practice2 {
     public static int[] solution(int[] numbers, int target) {
+        int []result = new int[2];
 
+        Hashtable <Integer,Integer> ht = new Hashtable();
+        for (int i = 0; i < numbers.length; i++) {
+            if(ht.containsKey(numbers[i])){
+                result[0] = ht.get(numbers[i]);
+                result[1] = i;
+                return result;
+            }
+            ht.put(target - numbers[i], i); //값을 다 넣지 않고 target에서 현재요소를 뺀 값을 넣음.
+            //다음요소가 이미 들어있는 키 값과 동일한 값이 나온다면 그 두 값이 target이 되는 값.
+        }
         return null;
     }
 

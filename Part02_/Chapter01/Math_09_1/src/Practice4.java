@@ -4,19 +4,21 @@ import java.util.HashSet;
 public class Practice4 {
     public static boolean solution(int n) {
         int result = 0;
-        int rest = 0;
         boolean flag = false;
-
-        if(n == 1){ //n이 1이 나오면 탈출
-            return true;
-        }
+        int checkRest = (int)Math.pow(n % 10, 2);
         while(n != 0){
-            rest = n % 10;
-            result += (int)Math.pow(rest,2);
+            result = 0;
+            int rest = n % 10;
+            result += (int)Math.pow(rest, 2);
             n /= 10;
+            if(checkRest == result){
+                flag = false;
+                break;
+            }
         }
-        flag = solution(result);
-
+        if(n == 1){
+            flag = true;
+        }
         return flag;
     }
 

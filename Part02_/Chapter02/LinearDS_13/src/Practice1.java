@@ -8,9 +8,22 @@
 // 배열2: 1, 2, 3, 4, 5
 // 출력: True, False, True, False, True
 
+import java.util.Hashtable;
+import java.util.stream.IntStream;
+
 public class Practice1 {
     public static void solution(int[] arr1, int[] arr2) {
+        Hashtable <Integer, Integer>ht = new Hashtable<>();
 
+        for (int i = 0; i <arr1.length ; i++) {
+            ht.put(arr1[i], arr1[i]);
+        }
+        for (int i = 0; i < arr2.length; i++) {
+            if(ht.containsKey(arr2[i])){
+                System.out.print("True"+" ");
+            }
+            else System.out.print("False"+" ");
+        }
     }
 
     public static void main(String[] args) {
