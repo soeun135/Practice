@@ -19,7 +19,7 @@ public class Practice {
     static double sqrt(int a){
         double result = 1;
         for (int i = 0; i < 100; i++) {
-            result = (result + a / result)/2;
+            result = (result + a / result)*1/2;
         }
 
         return result;

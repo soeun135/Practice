@@ -37,7 +37,7 @@ public class Main {
         }
 
 //      O(NlogN)
-        System.out.println("== O(NlogN) ==");
+ㅛ        System.out.println("== O(NlogN) ==");
         for (int i = 0; i < 2; i++) {
             for (int j = 1; j < 8; j*=2) {
                 System.out.println("hello");
