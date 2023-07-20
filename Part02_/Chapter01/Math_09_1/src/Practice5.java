@@ -46,13 +46,32 @@ public class Practice5 {
     
     // 재귀 풀이
     public static int solution2(int[][] grid) {
-
+        int [][] directions = {{1,0},{0,1},{-1,0},{0,-1}};
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if(grid[i][j] == 1){
+                    return recursion(grid,directions,i,j);
+                }
+            }
+        }
         return 0;
     }
 
     public static int recursion(int[][] grid, int[][] directions, int i, int j) {
-
-        return 0;
+        int result = 0;
+        grid[i][j] = -1;
+        for (int k = 0; k < 4; k++) {
+            int x = i + directions[k][0];
+            int y = j + directions[k][1];
+            if( x < 0 || y < 0 || x >= grid.length || y >= grid.length || grid[x][y] == 0) {
+                result ++;
+            } else{
+                if(grid[x][y] == 1){
+                    result += recursion(grid,directions,x,y);
+                }
+            }
+        }
+        return result;
     }
 
     public static void main(String[] args) {

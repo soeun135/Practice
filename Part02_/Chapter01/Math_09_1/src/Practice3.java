@@ -34,6 +34,31 @@ public class Practice3 {
 
     // # 2 문제 규칙 찾아 해결
     public static boolean solution2(String s1, String s2) {
+        final int ALPHABET = 26;
+        if(s1.length() > s2.length()){
+            return false;
+        }
+        int[] cnt = new int[ALPHABET];
+        for (int i = 0; i < s1.length(); i++) {
+            cnt[s1.charAt(i)-'a']++; //소문자 a를 0부터해서 값을 채울 수 있음
+        }
+        for (int i = 0; i < s2.length(); i++) {
+            cnt[s2.charAt(i)-'a']--; //소문자 a를 0부터해서 값을 채울 수 있음
+
+            if(i - s1.length() >= 0){
+                cnt[s2.charAt(i - s1.length()) - 'a']++;
+            }
+            boolean isZero = true;
+            for (int j = 0; j < ALPHABET; j++) {
+                if(cnt[j] != 0){
+                    isZero = false;
+                    break;
+                }
+            }
+            if(isZero){
+                return true;
+            }
+        }
        return false;
     }
 
