@@ -3,6 +3,16 @@ import java.util.ArrayList;
 public class Practice3 {
     // # 1 기본 permutation 방법
     public static boolean solution(String s1, String s2) {
+        boolean[] visited = new boolean[s1.length()];
+        char []out = new char[s1.length()];
+        ArrayList<String> list = new ArrayList<>();
+        permutation(s1.toCharArray(), 0, s1.length(), s1.length(),visited,out,list);
+
+        for(String s : list){
+            if(s2.contains(s)){
+                return true;
+            }
+        }
         return false;
     }
 
@@ -24,15 +34,7 @@ public class Practice3 {
 
     // # 2 문제 규칙 찾아 해결
     public static boolean solution2(String s1, String s2) {
-        String tmp = "";
-        for (int i = s1.length()-1; i >= 0; i--) {
-            char c = s1.charAt(i);
-            tmp += c;
-        }
-        System.out.println(tmp);
-
-        if( s2.contains(tmp)) return true;
-        else return false;
+       return false;
     }
 
     public static void main(String[] args) {

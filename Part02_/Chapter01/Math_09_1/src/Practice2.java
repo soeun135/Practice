@@ -2,36 +2,34 @@ import java.util.Arrays;
 
 public class Practice2 {
     public static void solution(int[] arr) {
-        //원래 수
-        int tenMulti = (int)Math.pow(10,arr.length-1);
-        int originNum = 0;
-        boolean answerFlag = false;
-        for(int x : arr){
-            originNum += x*tenMulti;
-            tenMulti /= 10;
+        boolean flag = false;
+        if(arr == null || arr.length < 2){
+            return;
         }
-        int depth = arr.length-1;
-        for (int i = 0; i < arr.length; i++) {
-            swap(arr,depth,depth-i);
-            tenMulti = (int)Math.pow(10,arr.length-1);
-            int tmpNum = 0;
-            for(int x : arr){
-                tmpNum += x*tenMulti;
-                tenMulti /= 10;
-            }
-            if(originNum > tmpNum){
-                System.out.println(tmpNum);
-                answerFlag = true;
+
+        int idx = -1;
+        for (int i = arr.length - 1; i >= 1 ; i--) {
+            if (arr[i] < arr[i - 1]) {
+                idx = i - 1;
                 break;
             }
         }
-        if(!answerFlag) System.out.println(originNum);
-
+        if(idx == -1) { //오른 쪽 수보다 큰 수를 찾지 못합.
+            System.out.println(Arrays.toString(arr));
+            return;
+        }
+        for (int i = arr.length -1 ; i > idx ; i--) {
+            if (arr[i] < arr[idx] && arr[i] != arr[i - 1]) {
+                swap(arr, i, idx);
+                break;
+            }
+        }
+        System.out.println("메롱"+Arrays.toString(arr));
     }
-    public static void swap(int []arr,int x,int y){
-        int temp = arr[x];
-        arr[x] = arr[y];
-        arr[y] = temp;
+    public static void swap(int []arr, int a, int b){
+        int tmp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = tmp;
     }
 
     public static void main(String[] args) {
