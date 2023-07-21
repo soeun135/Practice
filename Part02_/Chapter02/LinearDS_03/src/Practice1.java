@@ -10,24 +10,25 @@
 
 public class Practice1 {
     public static void main(String[] args) {
-        int arr[] = {1,2,3,4,5,6,7,8,9};
-
-        float sumOdd=0;
-        int oddCnt = 0;
-        float sumEven=0;
+        int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        float evenData = 0;
         int evenCnt = 0;
-        for(int x : arr){
-            if(x % 2 == 0){
-                sumEven += x;
-                evenCnt++;
+        float oddData = 0;
+        int oddCnt = 0;
+
+        for(int i : arr){
+            if( i % 2 == 0){
+                evenCnt ++;
+                evenData += i;
             }
             else{
-                sumOdd += x;
-                oddCnt++;
+                oddCnt ++;
+                oddData +=i;
             }
         }
-        System.out.println("짝수 평균"+sumEven/evenCnt);
-        System.out.println("홀수 평균"+sumOdd/oddCnt);
+        System.out.println("짝수 평균" + evenData / evenCnt);
+        System.out.println("홀수 평균" + oddData / oddCnt);
+
 
     }
 

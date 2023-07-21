@@ -27,7 +27,7 @@ public class Practice7 {
         //강사님 풀이
         int arr90[][] = new int[arr[0].length][arr.length];
         for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[i].length; j++) {
+            for (int j  = 0; j < arr[i].length; j++) {
                 int r = arr.length -1 -i;
                 arr90[j][r] = arr[i][j];
             }

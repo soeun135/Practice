@@ -7,52 +7,50 @@ class MyArray {
 
     int[] arr;
 
-//  배열의 초기 사이즈 설정
-    public MyArray(int size){
+    //  배열의 초기 사이즈 설정
+    MyArray(int size){
         this.arr = new int[size];
     }
 
-//  배열에 데이터 삽입
-    public void insertData(int idx, int num){
-        if(idx < 0 || idx > this.arr.length) {
-            System.out.println("Index error");
+    //  배열에 데이터 삽입
+    public void insertData(int idx, int data){
+        if(idx < 0 || idx > this.arr.length){
+            System.out.println("Index Error");
             return;
         }
-        int[] arrDup = this.arr.clone(); //기존 배열 데이터들을 복사
-        this.arr = new int[this.arr.length+1];
+        int[] arrDup = this.arr.clone();
+        this.arr = new int[this.arr.length + 1];
         for (int i = 0; i < idx; i++) {
-            this.arr[i] = arrDup[i]; //기존 데이터 인덱스까지 넣어줌
+            this.arr[i] = arrDup[i];
         }
-        for (int i = idx+1; i < this.arr.length; i++) {
-            arr[i] = arrDup[i-1];
+        for (int i = idx + 1; i < this.arr.length; i++) {
+            this.arr[i] = arrDup[i - 1];
         }
-        this.arr[idx] = num;
+        this.arr[idx] = data;
     }
 
-//  배열에서 특정 데이터 삭제
+    //  배열에서 특정 데이터 삭제
     public void removeData(int data){
         int targetIndex = -1;
-        for(int i : arr){
-            if( i == data ){
+        for (int i = 0; i < this.arr.length; i++) {
+            if (this.arr[i] == data){
                 targetIndex = i;
                 break;
             }
         }
         if(targetIndex == -1){
-            System.out.println("해당 데이터가 없습니다.");
-            return;
-        }
-        else{
+            System.out.println("해당 데이터 없음");
+        } else{
             int []arrDup = this.arr.clone();
-            this.arr = new int[this.arr.length-1];
+            this.arr = new int[this.arr.length - 1];
+
             for (int i = 0; i < targetIndex; i++) {
                 this.arr[i] = arrDup[i];
             }
             for (int i = targetIndex; i < this.arr.length; i++) {
-                this.arr[i] = arrDup[i+1];
+                this.arr[i] = arrDup[i + 1];
             }
         }
-
     }
 }
 
