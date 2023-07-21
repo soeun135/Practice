@@ -2,9 +2,10 @@
 // 배열을 이용한 기본 데크 직접 구현
 
 class MyDeque2 {
-    int arr[];
+    int arr[] ;
     int front = 0;
     int rear = 0;
+
     MyDeque2(int size) {
         this.arr = new int[size + 1];
     }
@@ -18,50 +19,48 @@ class MyDeque2 {
     }
 
     public void addFirst(int data) {
-        if(this.isFull()){
-            System.out.println("Dequq is Full");
+        if(isFull()){
+            System.out.println("Deque is Full");
             return;
         }
-        //front가 가리키고있는 부분엔 데이터 없다고 생각
-        //원형 큐 처럼
         this.arr[this.front] = data;
-        this.front = (this.arr.length + (this.front - 1)) % this.arr.length;
+        this.front = (this.front - 1 + this.arr.length) % this.arr.length;
     }
 
     public void addLast(int data) {
-        if(this.isFull()){
-            System.out.println("Dequq is Full");
+        if(isFull()){
+            System.out.println("Deque is Full");
             return;
         }
-        this.rear = (this.rear + 1) % arr.length;
+        this.rear = (this.rear + 1) % this.arr.length;
         this.arr[this.rear] = data;
     }
 
     public Integer removeFirst() {
-        if (isEmpty()){
+        if(isEmpty()){
             System.out.println("Deque is Empty");
             return null;
         }
-
         this.front = (this.front + 1) % this.arr.length;
         return this.arr[this.front];
     }
 
     public Integer removeLast() {
-        if (isEmpty()){
+        if(isEmpty()){
             System.out.println("Deque is Empty");
             return null;
         }
-        int data = this.arr[this.rear];
-        this.rear = (this.arr.length + (this.rear - 1)) % this.arr.length;
+        int data = arr[this.rear];
+        this.rear = (this.rear -1 + this.arr.length) % this.arr.length;
         return data;
     }
 
     public void printDeque() {
         int start = (this.front + 1) % this.arr.length;
         int end = (this.rear + 1) % this.arr.length;
-        for (int i = start; i != end ; i = (i + 1) % this.arr.length) {
-            System.out.print(this.arr[i]+" ");
+
+        for (int i = start; i != end; i = (i + 1) % this.arr.length) {
+            System.out.print(arr[i] + " ");
         }
         System.out.println();
     }

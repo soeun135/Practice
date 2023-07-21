@@ -48,26 +48,25 @@ class MyDeque {
         this.arr[this.rear] = data;
     }
 
-    public void addMiddle(int data) {
+    public void addMiddle(int data) { //안에 있는 데이터 갯수를 알아야함.
         if (this.isFull()) {
             System.out.println("Deque is full!");
             return;
         }
-        //강사님 코드
-        int elements = this.rear - this.front;
-        if (elements < 0) {
+        int elements = this.rear - this.front; //요소의 갯수
+        if(elements < 0){
             elements = (elements + this.arr.length) % this.arr.length;
         }
-        int mid = (this.rear - elements / 2 + this.arr.length) % this.arr.length + 1;
         int start = (this.rear + 1) % this.arr.length;
         int end = (this.rear - 1 + this.arr.length) % this.arr.length;
+        int mid = (this.rear - elements / 2) % this.arr.length + 1;
+
         for (int i = start; i != end ; i = (i - 1 + this.arr.length) % this.arr.length) {
             this.arr[i] = this.arr[(i - 1 + this.arr.length) % this.arr.length];
         }
         this.arr[mid] = data;
         this.rear = (this.rear + 1) % this.arr.length;
     }
-
 
     public Integer removeFirst() {
         if (this.isEmpty()) {
@@ -109,9 +108,9 @@ public class Practice3 {
         myDeque1.addLast(2);
         myDeque1.addLast(3);
         myDeque1.addLast(4);
-        myDeque1.printDeque(); // 1 2 3 4
+        myDeque1.printDeque();
 
-        myDeque1.addMiddle(10); // 1 2 10 3 4
+        myDeque1.addMiddle(10);
         myDeque1.printDeque();
 
         MyDeque myDeque2 = new MyDeque(5);

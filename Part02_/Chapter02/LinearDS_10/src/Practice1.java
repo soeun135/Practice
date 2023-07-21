@@ -13,10 +13,7 @@ class MyDeque1 {
     public boolean isEmpty() {
         if(this.list.size() == 0){
             return true;
-        }
-        else {
-            return false;
-        }
+        }return false;
     }
 
     public void addFirst(int data) {
@@ -28,10 +25,11 @@ class MyDeque1 {
     }
 
     public Integer removeFirst() {
-        if(this.isEmpty()){
+        if(isEmpty()){
             System.out.println("Deque is Empty");
             return null;
         }
+
         return (int)this.list.remove(0);
     }
 
@@ -40,7 +38,7 @@ class MyDeque1 {
             System.out.println("Deque is Empty");
             return null;
         }
-        return (int)this.list.remove(this.list.size()-1);
+        return (int)this.list.remove(this.list.size() - 1);
     }
 
     public void printDeque() {

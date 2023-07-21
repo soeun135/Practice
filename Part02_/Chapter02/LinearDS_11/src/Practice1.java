@@ -20,6 +20,7 @@ public class Practice1 {
         ArrayList result = new ArrayList();
 
         IntStream.of(arr).forEach(x -> deque.addLast(x));
+        //Arrays.stream(arr).forEach(x -> dq.add(x)); /이것도 된다 !
         System.out.println(deque);
 
         while(!deque.isEmpty()){
