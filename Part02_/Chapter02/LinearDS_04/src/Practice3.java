@@ -107,6 +107,10 @@ class CircularLinkedList {
             System.out.print(cur.data+" ");
             cur = cur.next;
         }
+//        do{
+//            System.out.print(cur.data+" ");
+//            cur = cur.next;
+//        } while(cur != this.head); 두번 쨰 풀 때 이걸로 했뜸 ㅎㅎ
         System.out.println(cur.data);
     }
 }
