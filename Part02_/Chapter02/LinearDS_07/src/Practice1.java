@@ -12,17 +12,10 @@ import java.util.Stack;
 
 public class Practice1 {
     public static String reverseString(String str) {
-        Stack stack = new Stack();
+        Stack <String> stack = new Stack();
         String result = "";
-        //강사님코드
-//        for(String s : str.split("")){
-//            stack.push(s);
-//        }
-//        while(!stack.isEmpty()){
-//            result = result + stack.pop();
-//        }
-        for (int i = 0; i < str.length(); i++) {
-            stack.push(str.charAt(i));
+        for(String s : str.split("")){
+            stack.push(s);
         }
         while(!stack.isEmpty()){
             result += stack.pop();

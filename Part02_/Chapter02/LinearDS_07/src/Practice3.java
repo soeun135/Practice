@@ -13,64 +13,27 @@ import java.util.Stack;
 
 public class Practice3 {
     public static double calculate(String string) {
-        //강사님코드
-        Stack <Double>stack = new Stack();
-        for(String s : string.split(" ")) {//공백기준으로 문자열을 쪼갬
-            if (s.equals("+")) {
-                stack.push(stack.pop() + stack.pop());
-            } else if (s.equals("-")) {
-                stack.push(-stack.pop() + stack.pop());
-            } else if (s.equals("*")) {
-                stack.push(stack.pop() * stack.pop());
-            } else if (s.equals("/")) {
-                stack.push(1 / stack.pop() * stack.pop());
-            } else {
-                stack.push(Double.parseDouble(s));
+        Stack <Integer> stack = new Stack();
+        double result = 0;
+        for(String s : string.split(" ")){
+            if(s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/")){
+                int num1 = stack.pop();
+                int num2 = stack.pop();
+                if(s.equals("+")){
+                    stack.push(num1 + num2);
+                } else if(s.equals("-")){
+                    stack.push(num2 - num1);
+                } else if(s.equals("*")){
+                    stack.push(num2 * num1);
+                } else {
+                    stack.push(num2 / num1);
+                }
+            } else{
+                stack.push(Integer.parseInt(s));
             }
-        }
-            return stack.pop();
-            //내코드
-//        Stack <String>stack = new Stack();
-//        int data1 = 0;
-//        int data2 = 0;
-//        double result = 0;
-//        for (int i = 0; i < string.length(); i++) {
-//            char c = string.charAt(i);
-//
-//            if('0' <= c && c <= '9'){
-//                stack.push(Character.toString(c));
-//            }
-//            else if(c==' '){
-//                continue;
-//            }
-//            else{
-//                int cnt = 0;
-//                char op = c;
-//                data1 = Integer.parseInt(stack.pop());
-//                data2 = Integer.parseInt(stack.pop());
-//                switch(op){
-//                    case '+':
-//                        cnt = data1+data2;
-//                        break;
-//                    case '*':
-//                        cnt =(data1*data2);
-//                        break;
-//                    case '/':
-//                        cnt =(data2/data1);
-//                        break;
-//                    case '-':
-//                        cnt =(data2-data1);
-//                        break;
-//                }
-//                stack.push(Integer.toString(cnt));
-//            }
-//        }
-//        if(!stack.isEmpty()){
-//            result = Double.parseDouble(stack.pop());
-//        }
-//        return result;
+        } result = stack.pop();
+        return result;
     }
-
 
     public static void main(String[] args) {
         // Test code

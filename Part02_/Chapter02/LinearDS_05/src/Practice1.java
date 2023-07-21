@@ -72,12 +72,12 @@ class LinkedList {
         Node cur = this.head;
         while (cur != null) {
             if (cur.data == data) {
-                //System.out.println("Data exist!");
+                //  System.out.println("Data exist!");
                 return true;
             }
             cur = cur.next;
         }
-//        System.out.println("Data not found!");
+        //    System.out.println("Data not found!");
         return false;
     }
 
@@ -100,12 +100,13 @@ class LinkedList {
 public class Practice1 {
     public static LinkedList removeDup(LinkedList listBefore) {
         LinkedList listAfter = new LinkedList();
+
         Node cur = listBefore.head;
         while(cur != null){
-         if(listAfter.findData(cur.data) == false){
-             listAfter.addData(cur.data);
-         }
-         cur = cur.next;
+            if(listAfter.findData(cur.data) == false){
+                listAfter.addData(cur.data);
+            }
+            cur = cur.next;
         }
         return listAfter;
     }
