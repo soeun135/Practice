@@ -22,33 +22,26 @@ import java.util.stream.IntStream;
 public class Practice2 {
 
     public static ArrayList getJosephusPermutation(int N, int K) {
-        ArrayList list = new ArrayList();
         Queue q = new LinkedList();
-        IntStream.range(1, N + 1).forEach(x -> q.add(x));
+        ArrayList list = new ArrayList();
+        IntStream.range(1,N + 1).forEach(x -> q.offer(x));
 
         int cnt = 0;
-        while (!q.isEmpty()) {
-            for (int i = 0; i < K - 1; i++) {
-                q.add(q.poll());
+        while(!q.isEmpty()){
+            cnt += 1;
+            int data = (int)q.poll();
+            if( cnt  % K == 0){
+                list.add(data);
+            }else{
+                q.offer(data);
             }
-            list.add(q.poll());
-            //강사님 코드
-//            int data = (int)q.remove();
-//            cnt += 1;
-//            if(cnt % K == 0){
-//                list.add(data);
-//            }
-//            else{
-//                q.add(data);
-//            }
-            }
-            return list;
         }
+        return list;
+    }
 
     public static void main(String[] args) {
         // Test code
         System.out.println(getJosephusPermutation(5, 2));
         System.out.println(getJosephusPermutation(7, 3));
-
     }
 }

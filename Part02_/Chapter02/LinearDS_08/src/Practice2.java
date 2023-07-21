@@ -2,11 +2,12 @@
 // 배열을 이용한 기본 큐 직접 구현 (원형 큐)
 
 class MyQueue2 {
-    int arr[] ;
-    int front=0;
+    int arr[];
+    int front = 0;
     int rear = 0;
+
     MyQueue2(int size) {
-        arr = new int[size+1];
+        this.arr = new int[size + 1];
     }
 
     public boolean isEmpty() {
@@ -15,15 +16,14 @@ class MyQueue2 {
 
     public boolean isFull() {
         return (this.rear + 1) % this.arr.length == this.front;
-        //rear 인덱스가 front와 같은 곳으로 돌아옴.
     }
 
     public void enqueue(int data) {
-        if(this.isFull()){
-            System.out.println("Queue is Full !");
+        if(isFull()){
+            System.out.println("Queue is Full");
             return;
         }
-        this.rear = (this.rear + 1) % this.arr.length;
+        this.rear = (this.rear + 1) % this.arr.length ;
         this.arr[this.rear] = data;
     }
 
@@ -32,15 +32,16 @@ class MyQueue2 {
             System.out.println("Queue is Empty");
             return null;
         }
-        front = (front + 1) % this.arr.length;
-        return this.arr[front];
+        this.front = (this.front + 1) % this.arr.length;
+        return this.arr[this.front];
     }
 
     public void printQueue() {
         int start = (this.front + 1) % this.arr.length;
         int end = (this.rear + 1) % this.arr.length;
+
         for (int i = start; i != end ; i = (i + 1) % this.arr.length) {
-            System.out.print(this.arr[i]+" ");
+            System.out.print(this.arr[i] + " ");
         }
         System.out.println();
     }
@@ -73,7 +74,7 @@ public class Practice2 {
         System.out.println(myQueue.dequeue());  // 3
         System.out.println(myQueue.dequeue());  // 4
         System.out.println(myQueue.dequeue());  // 5
-        myQueue.printQueue();   //6, 7
+        myQueue.printQueue();   // 6, 7
         System.out.println(myQueue.dequeue());  // 6
         System.out.println(myQueue.dequeue());  // 7
         myQueue.dequeue();      // Queue is empty!

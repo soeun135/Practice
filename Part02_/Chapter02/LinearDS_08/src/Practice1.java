@@ -13,8 +13,9 @@ class MyQueue1 {
     public boolean isEmpty() {
         if(this.list.size() == 0){
             return true;
+        }else{
+            return false;
         }
-        else return false;
     }
 
     public void push(int data) {
@@ -22,17 +23,15 @@ class MyQueue1 {
     }
 
     public Integer pop() {
-        if(this.isEmpty()){
+        if(isEmpty()){
             System.out.println("Queue is Empty");
             return null;
         }
-        int data = (int)this.list.get(0);
-        this.list.remove(0);
-        return data;
+        return (int)this.list.remove(0);
     }
 
     public Integer peek() {
-        if(this.isEmpty()){
+        if(isEmpty()){
             System.out.println("Queue is Empty");
             return null;
         }
@@ -40,7 +39,7 @@ class MyQueue1 {
     }
 
     public void printQueue() {
-        System.out.println(this.list);
+        System.out.println(list);
     }
 }
 

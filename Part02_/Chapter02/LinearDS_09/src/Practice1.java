@@ -20,17 +20,17 @@ import java.util.stream.IntStream;
 
 public class Practice1 {
     public static int findLastCard(int N) {
-        Queue q = new LinkedList();
-//        for (int i = 1; i <= N ; i++) {
-//            q.add(i);
+        Queue<Integer> q = new LinkedList();
+//        for (int i = 0; i < N; i++) {
+//            q.offer(i+1);
 //        }
-        IntStream.range(1,N+1).forEach(x -> q.add(x));
-        while(q.size() > 1){
-            q.remove();
-            q.add(q.poll());
+        IntStream.range(1,N+1).forEach(x -> q.offer(x));
+        while(q.size() != 1){
+            q.poll();
+            q.offer(q.poll());
         }
 
-        return (int)q.poll();
+        return q.poll();
     }
 
     public static void main(String[] args) {
