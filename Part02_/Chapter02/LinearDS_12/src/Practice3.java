@@ -9,26 +9,27 @@ class MyHashTable3 extends MyHashTable {
 
     public void setValue(int key, int data) {
         int idx = this.getHash(key);
+
         if(this.elemCnt == this.table.length){
-            System.out.println("HashTable is Full !");
+            System.out.println("Hash Table is Full");
             return;
-        }
-        else if (this.table[idx] == null){
+        } else if(this.table[idx] == null){
             this.table[idx] = data;
-        }
-        else{
+        } else{
             int newIdx = idx;
-            int cnt = 0; // 충돌 세기 위한 변수
+            int cnt = 0; //충돌 발생횟수
+
             while(true){
-                newIdx = (newIdx + (int)Math.pow(2, cnt)) % this.table.length;
+                newIdx = (newIdx + (int)Math.pow(2,cnt)) % this.table.length;
                 if(this.table[newIdx] == null){
                     break;
+                } else{
+                    cnt++;
                 }
-                cnt++;
             }
             this.table[newIdx] = data;
         }
-        this.elemCnt++;
+        this.elemCnt ++;
     }
 }
 
