@@ -7,12 +7,52 @@
 // 입력 트리: 5, 1, 48, null, null, 12, 51
 // 출력: 3
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Practice2 {
 
     public static void solution(Integer[] data) {
+        BinarySearchTree bst = new BinarySearchTree(data[0]);
 
+        for (int i = 1; i < data.length ; i++) {
+            if (data[i] == null) {
+                continue;
+            }
+            bst.addNode(data[i]);
+        }
+        ArrayList <Integer> list = new ArrayList<>();
+
+        levelOrder(bst.head, list);
+        //list에서 최소값 뽑을 수 있는 방법
+        //1
+//        int min = list.stream().min((x1, x2) -> x1 > x2 ? 1 : -1).get();
+//        System.out.println(min);
+
+        //2
+        Collections.sort(list);
+        System.out.println(list.get(0));
     }
 
+    public static void levelOrder(Node node, ArrayList<Integer> list) {
+        Queue<Node> q = new LinkedList();
+        q.add(node);
+
+        while(!q.isEmpty()){
+            Node cur = q.poll();
+
+            if(cur.left != null) {
+                list.add(Math.abs(cur.key - cur.left.key));
+                q.add(cur.left);
+            }
+            if(cur.right != null) {
+                list.add(Math.abs(cur.key - cur.right.key));
+                q.add(cur.right);
+            }
+        }
+    }
     public static void main(String[] args) {
         // Test code
         Integer[] data = {3, 1, 4, null, 2};

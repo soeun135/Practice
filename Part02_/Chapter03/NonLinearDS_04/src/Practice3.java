@@ -8,9 +8,37 @@
 // 입력 트리: 5,3,6,2,4,null,7
 // 결과: false
 
+import java.util.HashSet;
+
 public class Practice3 {
     public static void solution(Integer[] data, int target) {
+        BinarySearchTree bst = new BinarySearchTree(data[0]);
 
+        for (int i = 1; i < data.length ; i++) {
+            if (data[i] == null) {
+                continue;
+            }
+            bst.addNode(data[i]);
+        }
+        HashSet <Integer>set = new HashSet<>();
+        System.out.println(search(bst.head, set, target));
+    }
+    public static boolean search(Node node, HashSet <Integer> set, int target){
+        if (node == null) {
+            return false;
+        }
+        if (set.contains(target - node.key)) {
+            return true;
+        }
+        set.add(node.key);
+
+        if(search(node.left, set, target)) {
+            return true;
+        }
+        if(search(node.right, set, target)) {
+            return true;
+        }
+        return false;
     }
 
     public static void main(String[] args) {
