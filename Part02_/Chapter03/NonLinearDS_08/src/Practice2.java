@@ -2,6 +2,8 @@
 // 최소 힙, 최대 힙을 이용하여 데이터를 오름차순, 내림차순으로 출력해보세요.
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 class MaxHeap{
     ArrayList<Integer> heap;
@@ -72,8 +74,24 @@ class MaxHeap{
 
 public class Practice2 {
     public static void solution(MinHeap minHeap) {
+        MaxHeap maxHeap = new MaxHeap();
 
+        System.out.print("오름차순 : ");
+
+        while(minHeap.heap.size() != 1) {
+            int data = minHeap.delete();
+            System.out.print(data + " ");
+            maxHeap.insert(data);
+        }
+        System.out.println();
+
+        System.out.print("내림차순 : ");
+        while(maxHeap.heap.size() != 1) {
+            int data = maxHeap.delete();
+            System.out.print(data + " ");
+        }
     }
+
 
     public static void main(String[] args) {
         // Test code
