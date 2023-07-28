@@ -1,4 +1,4 @@
-// Practice
+package Chapter01.Math_05.src;// Practice
 // 1, 2, 3, 4 를 이용하여 세자리 자연수를 만드는 방법 (순서 X, 중복 x)의 각 결과를 출력하시오
 
 public class Practice {

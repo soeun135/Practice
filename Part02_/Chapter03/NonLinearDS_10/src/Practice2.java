@@ -13,9 +13,25 @@
 // 출력: 2
 
 
+import java.util.Collections;
+import java.util.PriorityQueue;
+
 public class Practice2 {
     public static void solution(int[] stones) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 
+        for (int i = 0; i < stones.length ; i++) {
+            pq.offer(stones[i]);
+        }
+        while(pq.size() > 1){
+            int num1 = pq.poll();
+            int num2 = pq.poll();
+            int rest = Math.max(num1 - num2, num2 - num1);
+            if(rest != 0) {
+                pq.offer(rest);
+            }
+        }
+        System.out.println(pq.poll());
     }
 
     public static void main(String[] args) {
