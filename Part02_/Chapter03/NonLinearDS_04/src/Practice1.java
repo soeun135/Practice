@@ -52,20 +52,19 @@ class BinarySearchTree {
 
 public class Practice1 {
     public static void solution(Integer[] data, int n) {
-        BinarySearchTree bst = new BinarySearchTree(data[0]); //루트 쪽에 데이터가 잡힐 수 있도록 첫 번째 데이터 넣어줌
-
-        for (int i = 1; i < data.length ; i++) {
-            if(data[i] == null) {
+        BinarySearchTree bst = new BinarySearchTree(data[0]);
+        for (int i = 1; i < data.length; i++) {
+            if (data[i] == null) {
                 continue;
             }
             bst.addNode(data[i]);
         }
-        ArrayList <Integer>list = new ArrayList();
+        ArrayList list = new ArrayList();
         inOrder(bst.head, list);
-        System.out.println(list.get(n - 1));
-    }
 
-    public static void inOrder(Node node, ArrayList list) {
+        System.out.println(list.get(n-1));
+    }
+    public static void inOrder(Node node, ArrayList list){
         if (node == null) {
             return;
         }

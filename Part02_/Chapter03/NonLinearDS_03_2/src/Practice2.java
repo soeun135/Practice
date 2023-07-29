@@ -7,52 +7,54 @@ class AVLTree2 extends AVLTree{
     }
 
     public Node delete(Node node, int key) {
-        if (node == null){
+        if (node == null) {
             return null;
         }
-        if (key < node.key){
+
+        if (key < node.key) {
             node.left = delete(node.left, key);
         } else if (key > node.key) {
             node.right = delete(node.right, key);
-        } else{
-            //자식이 하나이거나 없는 케이스
-            if (node.left == null){
+        } else {
+            if (node.left == null) {//자식이 하나거나 없는 경우
                 return node.right;
-            } else if (node.right == null){
+            } else if (node.right == null) { //자식이 하나거나 없는 경우
                 return node.left;
-            } else{ //자식이 둘인 경우
+            } else { //자식이 둘인 경우
                 Node predecessor = node;
                 Node successor = node.left;
 
-                while(successor.right != null){
+                while (successor.right != null) {
                     predecessor = successor;
                     successor = successor.right;
                 }
+
                 predecessor.right = successor.left;
                 node.key = successor.key;
             }
         }
-        node.height = Math.max(height(node.left),height(node.right)) + 1;
+
+        node.height = Math.max(height(node.left), height(node.right)) + 1;
 
         int balance = getBalance(node);
 
         //LL
-        if (balance > 1 && getBalance(node.left) > 0){
+        if (balance > 1 && getBalance(node.left) > 0) {
             return rightRotate(node);
         }
 
         //RR
-        if (balance < -1 && getBalance(node.right) < 0){
+        if (balance < -1 && getBalance(node.right) < 0) {
             return leftRotate(node);
         }
 
         //LR
-        if (balance > 1 && getBalance(node.left) < 0){
+        if (balance > 1 && getBalance(node.left) < 0) {
             return lrRotate(node);
         }
 
         //RL
-        if (balance < -1 && getBalance(node.right) > 0){
+        if (balance < -1 && getBalance(node.right) > 0) {
             return rlRotate(node);
         }
         return node;

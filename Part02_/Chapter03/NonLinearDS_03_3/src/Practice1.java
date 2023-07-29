@@ -6,7 +6,7 @@ import sun.awt.image.ImageWatched;
 import java.util.LinkedList;
 import java.util.Queue;
 
-class Node{
+class Node {
     int key;
     int color;
     Node left;
@@ -22,33 +22,36 @@ class Node{
     }
 }
 
-class RedBlackTree{
+class RedBlackTree {
     final int BLACK = 0;
     final int RED = 1;
 
     Node head;
 
     public void insert(int key) {
-        Node checkNode = null;
+        Node checkNode = null; //새로 삽입이 일어나서 rebalancing이 필요할 때 그 부분을 짚어놓을 변수
+
         if (this.head == null) {
-            this.head = new Node(key, BLACK, null, null, null); //루트는 블랙으로 만들어짐
+            this.head = new Node(key, BLACK, null, null, null);
         } else {
             Node cur = this.head;
 
-            while (true) {
+            while (true) { //기본적인 삽입
                 Node pre = cur;
 
                 if (key < cur.key) {
                     cur = cur.left;
+
                     if (cur == null) {
-                        pre.left = new Node(key, RED, null, null, pre); //처음 추가될 때 RED로 넣음
-                        checkNode = pre.left; //리밸런싱 체크해야된다 라는 의미의 체크
+                        pre.left = new Node(key, RED,null, null, pre);
+                        checkNode = pre.left;
                         break;
                     }
                 } else {
                     cur = cur.right;
+
                     if (cur == null) {
-                        pre.right = new Node(key, RED, null, null, pre);
+                        pre.right = new Node(key, RED,null, null, pre);
                         checkNode = pre.right;
                         break;
                     }
@@ -56,10 +59,10 @@ class RedBlackTree{
             }
             reBalance(checkNode);
         }
-
     }
+
     public void reBalance(Node node) {
-        while (node.parent != null && node.parent.color == RED) { //double red 상황
+        while (node.parent != null && node.parent.color == RED) {
             Node sibling = null;
 
             if (node.parent == node.parent.parent.left) {
@@ -68,7 +71,7 @@ class RedBlackTree{
                 sibling = node.parent.parent.left;
             }
 
-            if (sibling != null && sibling.color == RED) {
+            if (sibling != null && sibling.color == RED) { //부모노드의 형제노드가 RED 일 때 Recoloring
                 node.parent.color = BLACK;
                 sibling.color = BLACK;
                 node.parent.parent.color = RED;
@@ -77,17 +80,16 @@ class RedBlackTree{
                     node.parent.parent.color = BLACK;
                     break;
                 } else {
-                    node = node.parent.parent;
+                    node = node.parent.parent; //루트가 아니었으면 얘를 다시 리밸런싱 대상으로 보고 진행 반복
                     continue;
                 }
-            } else { //부모노드의 형제노드가 black이거나 없을 때
+            } else { //Restructuring 부모노드의 형제가 없거나 블랙일 때
                 if (node.parent == node.parent.parent.left) {
-                    if (node == node.parent.right) { //lr케이스
+                    //LR케이스
+                    if (node == node.parent.right) {
                         node = node.parent;
-                        //회전
                         leftRotate(node);
                     }
-
                     node.parent.color = BLACK;
                     node.parent.parent.color = RED;
                     rightRotate(node.parent.parent);
@@ -130,7 +132,6 @@ class RedBlackTree{
             node.parent.left = node;
         }
     }
-
     public void rightRotate(Node node) {
         if (node.parent == null) {
             Node lNode = this.head.left;
@@ -158,12 +159,12 @@ class RedBlackTree{
             node.parent.right = node;
         }
     }
-    public void levelOrder(Node node) {
-        char[] color = {'B', 'R'};
 
-        Queue<Node> q = new LinkedList<>();
+    public void levelOrder(Node node){
+        char[] color = {'B','R'};
+
+        Queue <Node> q = new LinkedList();
         q.add(node);
-
         while(!q.isEmpty()) {
             Node cur = q.poll();
 
@@ -171,14 +172,15 @@ class RedBlackTree{
             if (cur.left != null) {
                 q.offer(cur.left);
             }
-
-            if (cur.right != null) {
+            if( cur.right != null) {
                 q.offer(cur.right);
             }
         }
         System.out.println();
     }
 }
+
+
 public class Practice1 {
     public static void main(String[] args) {
         // Test code

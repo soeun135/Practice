@@ -25,72 +25,75 @@ class BinarySearchTree {
     }
 
     public void addNode(int key) {
-        if(this.head == null){
-            this.head = new Node(key, null, null);
-        } else{
-            Node cur = this.head;
-            while(true){
-                Node pre = cur;
 
-                if(key < cur.key){
+        if (this.head == null) {
+            this.head = new Node(key, null, null);
+        } else {
+            Node cur = this.head;
+            while(true) {
+                Node pre = cur;
+                if (cur.key > key) {
                     cur = cur.left;
 
-                    if(cur == null){
+                    if (cur == null) {
                         pre.left = new Node(key, null, null);
                         break;
                     }
-                } else{
+                } else {
                     cur = cur.right;
 
-                    if(cur == null){
+                    if (cur == null) {
                         pre.right = new Node(key, null, null);
                         break;
                     }
                 }
             }
         }
-
     }
 
     public void removeNode(int key) {
-        Node parent = null;
-        Node successor = null; //지울려는 노드의 자식 노드 중 후계자 찾을 변수
-        Node predecessor = null; //지울려는 노드의 부모노드를 가리킬 변수
-        Node child = null; //sucessor의 자식이 있는지 확인할 변수
+        Node parent = null; //부모노드 가리킬 애
+        Node successor = null; //지울려고 하는 노드자리로 올려줄 후계자 (왼쪽 서브트리의 제일 큰 노드 or 오른 쪽 서브트리의 제일 작은 노드)
+        Node predecessor = null; //후계자의 부모 가리킬 노드
+        Node child = null; //successor의 자식노드 가리킬 노드
 
         Node cur = this.head;
-        while(cur != null){
-            if(cur.key == key){ //cur에는 삭제하려는 노드 값
+        while (cur != null) {
+            if (key == cur.key) {
                 break;
             }
-            parent = cur; //삭제하려고 하는 노드의 부모노드 값을 가지고 있음
-            if (key < cur.key){
+
+            parent = cur;
+             if (cur.key > key) {
                 cur = cur.left;
-            } else{
+            } else {
                 cur = cur.right;
             }
         }
-        if (cur == null){
-            System.out.println("key에 해당하는 노드가 없습니다.");
+
+        if (cur == null) {
+            System.out.println("key에 해당하는 노드가 업슴");
             return;
         }
-        if(cur.left == null && cur.right == null){ //삭제하려는 노드가 leaf노드
-            if (parent == null){
+        if (cur.left == null && cur.right == null) { //자식이 하나도 없는 경우 Leaf 노드
+            if (parent == null) { //노드 한 개였는데 삭제하는 경우
                 this.head = null;
             } else {
-                if (parent.left == cur){
+                if (parent.left == cur) {
                     parent.left = null;
-                } else {
+                }
+                else {
                     parent.right = null;
                 }
             }
-        } else if((cur.left != null && cur.right == null) || (cur.left == null && cur.right != null)){ //자식이 하나만 있으면
-            if (cur.left != null){
+        } else if ((cur.left == null && cur.right != null) || (cur.left != null && cur.right == null)) { //자식노드가 하나인 경우
+            if (cur.left != null) {
                 child = cur.left;
-            } else{
+            } else {
                 child = cur.right;
             }
-            if (parent == null){ //루트노드에 자식노드가 하나만 있는 형태
+
+            if (parent == null) { //삭제하려고 하는게 루트. 자식노드가 하나만 있던 경우
                 this.head = child;
             } else {
                 if (parent.left == cur) {
@@ -99,25 +102,23 @@ class BinarySearchTree {
                     parent.right = child;
                 }
             }
-        } else { //자식 노드가 둘인 경우
+        }else { //자식이 둘인 경우
             predecessor = cur;
-            successor = cur.left; //삭제할 노드의 왼쪽 서브트리에서 가장 큰 값을 찾을 거임.
-
-            while(successor.right != null){
+            successor = cur.left;
+            while (successor.right != null) {
                 predecessor = successor;
-                successor = successor.right; //후계자 선택
+                successor = successor.right;
             }
-            predecessor.right = successor.left; //successor의 right는 없음 있었으면 위에서 successor이 됐을 거임
-            //아무튼 얘는 위로 올라갈 거니까 얘의 왼쪽 자식노드를 부모노드의 오른 쪽에 붙여줌
+            predecessor.right = successor.left;
             successor.left = cur.left;
             successor.right = cur.right;
 
-            if (parent == null){ //루트노드이면ㅁ서 자식노드가 두 개인 경우
+            if (parent == null) {
                 this.head = successor;
-            } else{
-                if (parent.left == cur){
+            } else {
+                if (parent.left == cur) {
                     parent.left = successor;
-                } else{
+                } else {
                     parent.right = successor;
                 }
             }
