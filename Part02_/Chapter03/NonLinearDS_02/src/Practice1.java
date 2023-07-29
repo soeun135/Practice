@@ -15,29 +15,31 @@
 // 출력: 0, 0, 1, 0, 0, 1, 1
 
 
+import java.util.Arrays;
+
 public class Practice1 {
     public static void solution(int n) {
-        int arr[] = new int[(int)Math.pow(2,n)];
+        int arr[] = new int[(int)Math.pow(2,n)-1];
         arr[0] = 0;
-        for (int i = 0; i < (int) Math.pow(2, n - 1) -1 ; i++) {
-            arr[2 * i + 1] = 0;
-            arr[2 * i + 2] = 1;
+        int x = 0;
+        for (int i = 0; i < (int)Math.pow(2, n - 1) -1; i++) {
+            arr[i * 2 + 1] = 0;
+            arr[i * 2 + 2] = 1;
         }
-        //중위순회
-        inOrder(arr,0);
+        inOrder(arr, 0);
         System.out.println();
     }
 
-    public static void inOrder(int[] arr, int idx){
+    public static void inOrder(int[] arr , int idx) {
         int left = 2 * idx + 1;
         int right = 2 * idx + 2;
 
-        if(left < arr.length - 1){
-            inOrder(arr,left);
+        if (left < arr.length) {
+            inOrder(arr, left);
         }
         System.out.print(arr[idx] + " ");
-        if(right < arr.length - 1){
-            inOrder(arr,right );
+        if (right < arr.length) {
+            inOrder(arr, right);
         }
     }
 

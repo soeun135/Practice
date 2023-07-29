@@ -1,7 +1,6 @@
 // Practice2
 // 연결 리스트를 이용한 이진 트리 구성, 순회
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -16,48 +15,53 @@ class Node {
         this.right = right;
     }
 }
+
+
 class BinaryTree2 {
     Node head;
-    BinaryTree2(){}
-    BinaryTree2(char[] arr){
+
+    BinaryTree2() {}
+    BinaryTree2(char []arr) {
         Node[] nodes = new Node[arr.length];
+
         for (int i = 0; i < arr.length; i++) {
             nodes[i] = new Node(arr[i], null, null);
         }
-        for (int i = 0; i < arr.length ; i++) {
-            int left = 2 * i + 1;
-            int right = 2 * i + 2;
+        for (int i = 0; i < arr.length; i++) {
+            int left = i * 2 + 1;
+            int right = i * 2 + 2;
 
-            if(left < arr.length){
+            if (left < arr.length) {
                 nodes[i].left = nodes[left];
             }
-            if(right < arr.length){
+            if (right < arr.length) {
                 nodes[i].right = nodes[right];
             }
         }
         this.head = nodes[0];
     }
 
-    public void preOrder(Node node){
-        if(node == null){
-            return;
+    public void preOrder(Node node) {
+        if (node == null) {
+            return ;
         }
+
         System.out.print(node.data + " ");
         this.preOrder(node.left);
         this.preOrder(node.right);
     }
 
-    public void inOrder(Node node){
-        if(node == null){
-            return;
+    public void inOrder(Node node) {
+        if (node == null) {
+            return ;
         }
         this.inOrder(node.left);
         System.out.print(node.data + " ");
         this.inOrder(node.right);
     }
 
-    public void postOrder(Node node){
-        if(node == null){
+    public void postOrder(Node node) {
+        if (node == null) {
             return;
         }
         this.postOrder(node.left);
@@ -65,18 +69,19 @@ class BinaryTree2 {
         System.out.print(node.data + " ");
     }
 
-    public void levelOrder(Node node){
-        Queue<Node> q = new LinkedList();
+    public void levelOrder(Node node) {
+        Queue<Node> q = new LinkedList<>();
         q.add(node);
 
-        while(!q.isEmpty()){
-            Node cur = q.remove();
+        while (!q.isEmpty()) {
+            Node cur = q.poll();
+
             System.out.print(cur.data + " ");
-            if(cur.left != null){
-                q.add(cur.left);
+            if (cur.left != null) {
+                q.offer(cur.left);
             }
-            if(cur.right != null){
-                q.add(cur.right);
+            if (cur.right != null) {
+                q.offer(cur.right);
             }
         }
     }

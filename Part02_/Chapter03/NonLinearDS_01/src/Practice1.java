@@ -2,58 +2,56 @@
 // 배열을 이용한 이진 트리 구성, 순회
 
 class BinaryTree {
-    char[] arr;
+    char arr[];
 
-    BinaryTree(char[] data){
+    public BinaryTree(char[] data) {
         this.arr = data.clone();
     }
 
-    public void preOrder(int idx){
-        System.out.print(this.arr[idx] + " ");
+    public void preOrder(int idx) {
+        int left = idx * 2 + 1;
+        int right = idx * 2 + 2;
 
-        int left = 2 * idx + 1;
-        int right = 2 * idx + 2;
-        if(left < this.arr.length){
-            this.preOrder(left);
+        System.out.print(this.arr[idx] +" ");
+        if (left < this.arr.length) {
+            preOrder(left);
         }
-        if(right < this.arr.length){
-            this.preOrder(right);
+        if (right < this.arr.length) {
+            preOrder(right);
         }
     }
 
-    public void inOrder(int idx){
-        int left = 2 * idx + 1;
-        int right = 2 * idx + 2;
+    public void inOrder(int idx) {
+        int left = idx * 2 + 1;
+        int right = idx * 2 + 2;
 
-        if(left < this.arr.length){
+        if (left < this.arr.length) {
             this.inOrder(left);
         }
         System.out.print(this.arr[idx] + " ");
-
-        if(right < this.arr.length){
+        if (right < this.arr.length) {
             this.inOrder(right);
         }
     }
 
-    public void postOrder(int idx){
-        int left = 2 * idx + 1;
-        int right = 2 * idx + 2;
+    public void postOrder(int idx) {
+        int left = idx * 2 + 1;
+        int right = idx * 2 + 2;
 
-        if(left < this.arr.length){
-            postOrder(left);
+        if (left < this.arr.length) {
+            this.postOrder(left);
         }
-        if(right < this.arr.length){
-            postOrder(right);
+        if (right < this.arr.length) {
+            this.postOrder(right);
         }
         System.out.print(this.arr[idx] + " ");
     }
 
-    public void levelOrder(int idx){
-        for (int i = 0; i < this.arr.length; i++) {
+    public void levelOrder(int idx) {
+        for (int i = idx; i < this.arr.length; i++) {
             System.out.print(this.arr[i] + " ");
         }
     }
-
 }
 
 public class Practice1 {
