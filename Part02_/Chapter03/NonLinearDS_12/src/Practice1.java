@@ -112,8 +112,20 @@ class Trie {
 
 public class Practice1 {
     public static boolean solution(String[] strs, String prefix) {
+        Trie trie = new Trie();
+        for (String str :strs) {
+            trie.insert(str);
+        }
+        Node cur = trie.root;
+        for (int i = 0; i < prefix.length(); i++) {
+            char c = prefix.charAt(i);
 
-        return false;
+            if (cur.child.get(c) == null) {
+                return false;
+            }
+            cur = cur.child.get(c);
+        }
+        return true;
     }
 
     public static void main(String[] args) {
