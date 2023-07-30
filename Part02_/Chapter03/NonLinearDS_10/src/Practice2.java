@@ -16,19 +16,20 @@
 import java.util.Collections;
 import java.util.PriorityQueue;
 
+import static java.util.Collections.reverseOrder;
+
 public class Practice2 {
     public static void solution(int[] stones) {
-        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue <Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 
-        for (int i = 0; i < stones.length ; i++) {
-            pq.offer(stones[i]);
+        for (int s : stones) {
+            pq.offer(s);
         }
-        while(pq.size() > 1){
-            int num1 = pq.poll();
-            int num2 = pq.poll();
-            int rest = Math.max(num1 - num2, num2 - num1);
-            if(rest != 0) {
-                pq.offer(rest);
+        while (pq.size() > 1) {
+            int x = pq.poll();
+            int y = pq.poll();
+            if (x - y != 0) {
+                pq.offer(Math.abs(x - y));
             }
         }
         System.out.println(pq.poll());

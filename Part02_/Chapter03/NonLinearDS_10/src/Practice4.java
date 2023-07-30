@@ -16,20 +16,21 @@ import java.util.PriorityQueue;
 
 public class Practice4 {
     public static String solution(String s) {
-        HashMap <String,Integer> map = new HashMap<>();
+        HashMap <String, Integer> map = new HashMap<>();
+
         for (String str : s.split("")) {
             map.put(str, map.getOrDefault(str, 0) + 1);
         }
-        PriorityQueue <Map.Entry<String, Integer>> pq =
-                new PriorityQueue<>((x, y) -> y.getValue() - x.getValue());
-        for (Map.Entry<String, Integer> item : map.entrySet()) {
+        PriorityQueue <Map.Entry<String, Integer>> pq = new PriorityQueue<>((x,y) -> y.getValue() - x.getValue());
+
+        for (Map.Entry<String, Integer> item : map.entrySet()){
             pq.offer(item);
         }
 
         StringBuffer sb = new StringBuffer();
         Map.Entry <String, Integer> prev = null;
         while (!pq.isEmpty()) {
-            Map.Entry<String, Integer> cur = pq.poll();
+            Map.Entry <String, Integer> cur = pq.poll();
 
             if (prev != null && prev.getValue() > 0) {
                 pq.offer(prev);

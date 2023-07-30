@@ -6,8 +6,9 @@ import java.util.*;
 
 public class Main {
     public static void enqueue(LinkedList<Integer> list, int data) {
-        int idx = list.size(); //list의 가장 끝 인덱스 -1 안 해주나 ?
-        for (int i = 0; i < list.size() ; i++) {
+        //값이 작을 수록 우선순위 높은 형태
+        int idx = list.size();
+        for (int i = 0; i < list.size(); i++) {
             if (list.get(i) > data) {
                 idx = i;
                 break;
@@ -17,12 +18,10 @@ public class Main {
     }
 
     public static Integer dequeue(LinkedList<Integer> list) {
-        if (list.size() == 0) {
+        if (list.size() == 1) {
             return null;
         }
-        int data = list.get(0);
-        list.remove(0);
-        return data;
+        return list.remove(0);
     }
 
     public static void main(String[] args) {

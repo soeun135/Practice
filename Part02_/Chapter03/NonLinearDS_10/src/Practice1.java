@@ -17,16 +17,23 @@ import java.util.PriorityQueue;
 
 public class Practice1 {
     public static int solution1(int[] nums, int k) {
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
-        int answer = 0;
-        for (int i : nums) {
-            pq.add(i);
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 
-            if(pq.size() > k) {
-                pq.poll();
-            }
+        for (int i = 0; i < nums.length; i++) {
+            pq.offer(nums[i]);
         }
-        return pq.peek();
+        for (int i = 0; i < k - 1; i++) {
+            pq.poll();
+        }
+        return pq.poll();
+//        강사님 코드
+//        for (int num : nums) {
+//        pq.offer(num);
+//        if (qp.size() > k) {
+//            pq.poll();
+//        }
+//    }
+//    return pq.peek();
     }
 
     public static int solution2(int[] nums, int k) {

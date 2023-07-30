@@ -23,24 +23,25 @@ class Person{
 //        // 1 : 변경 안 함.
 //        // -1 : 변경
 //
-//        //새롭게 추가하는 데이터가 더 작을 때 변경 ( 적은 값이 위로 올라감, 오름차순)
-//      //  return this.age >= o.age ? 1 : -1;
-//
-//        //내림차순 새롭게 추가하는 데이터가 더 클 때 변경 ( 큰 값이 위로 올라감, 내림차순)
-//        return this.age <= o.age ? 1 : -1;
+//        //this가 원래 있던 거 o가 새로 들어오는 거
+//        //새롭게 추가하는 데이터가 더 작을 때 변경 ( 적은 값이 위로 올라감 ,오름차순)
+//        //return this.age >= o.age ? 1 : -1;
+//        return this.age - o.age;
+//        //내림차순
+//        //새롭게 추가하는 데이터가 더 클 때 변경 (더 큰 값이 위로 올라감, 내림차순)
+//        //return this.age >= o.age ? -1 : 1;
 //    }
 }
 
 public class Practice1 {
     public static void solution(String[] name, int[] age) {
         PriorityQueue <Person> pq = new PriorityQueue<>();
-//        for (int i = 0; i < age.length ; i++) {
-//            pq.add(new Person(name[i], age[i]));
+//        for (int i = 0; i < name.length; i++) {
+//            pq.offer(new Person(name[i], age[i]));
 //        }
-//        System.out.println("== 실제 출력 순서 ==");
-//        while(!pq.isEmpty()) {
-//            Person p = pq.poll();
-//            System.out.println(p.name + " " + p.age);
+//        while (!pq.isEmpty()) {
+//            Person cur = pq.poll();
+//            System.out.println(cur.name+" " +cur.age);
 //        }
     }
 
@@ -50,15 +51,15 @@ public class Practice1 {
 
         solution(name, age);
 
-        PriorityQueue<Person> pq2 = new PriorityQueue<>((Person p1, Person p2) -> p1.age >= p2.age ? 1 : -1);
+        PriorityQueue <Person> pq2 = new PriorityQueue<>(
+                (Person p1, Person p2) -> p1.age >= p2.age ? 1 : -1);
 
         for (int i = 0; i < name.length; i++) {
-            pq2.add(new Person(name[i], age[i]));
+            pq2.offer(new Person(name[i], age[i]));
         }
-        while(!pq2.isEmpty()) {
-            Person p = pq2.poll();
-            System.out.println(p.name+" : " + p.age);
+        while (!pq2.isEmpty()) {
+            Person cur = pq2.poll();
+            System.out.println(cur.name+" " +cur.age);
         }
-
     }
 }

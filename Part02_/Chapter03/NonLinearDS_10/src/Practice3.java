@@ -11,10 +11,6 @@
 // k: 3
 // 출력: 3, 1, 2
 
-
-import javafx.beans.binding.IntegerBinding;
-import javafx.beans.binding.MapExpression;
-
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
@@ -23,22 +19,38 @@ import java.util.PriorityQueue;
 public class Practice3 {
     public static void solution1(int[] nums, int k) {
         HashMap<Integer, Integer> map = new HashMap<>();
-        for (int num : nums) {
-            map.put(num, map.getOrDefault(num, 0) + 1);
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
         }
-        PriorityQueue <Map.Entry<Integer,Integer>> pq =
-                new PriorityQueue<>((x, y) -> y.getValue() == x.getValue() ?
-                        x.getKey() - y.getKey() : y.getValue() - x.getValue());
+
+        PriorityQueue<Map.Entry<Integer, Integer>> pq =
+                new PriorityQueue<>((x, y) -> x.getValue() == y.getValue() ? x.getKey() - y.getKey() : y.getValue() - x.getValue());
         for (Map.Entry<Integer, Integer> item : map.entrySet()) {
             pq.offer(item);
         }
         for (int i = 0; i < k; i++) {
-            Map.Entry <Integer,Integer> cur = pq.poll();
-            System.out.print(cur.getKey() + " ");
+            Map.Entry<Integer, Integer> item = pq.poll();
+            System.out.print(item.getKey() + " ");
         }
         System.out.println();
     }
 
+    public static void solution2(int[] nums, int k) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+        }
+
+        PriorityQueue<Num> pq = new PriorityQueue<>();
+        for (Map.Entry <Integer,Integer> item : map.entrySet()) {
+            pq.offer(new Practice3().new Num(item.getKey(), item.getValue()));
+        }
+        for (int i = 0; i < k; i++) {
+            Num item = pq.poll();
+            System.out.print(item.data + " ");
+        }
+        System.out.println();
+    }
     class Num implements Comparable<Num>{
         int data;
         int freq;
@@ -47,29 +59,14 @@ public class Practice3 {
             this.data = data;
             this.freq = freq;
         }
+
         @Override
         public int compareTo(Num o) {
             if (this.freq == o.freq) {
                 return this.data - o.data;
-            } else {
-                return o.freq - this.freq;
             }
+            return o.freq - this.freq;
         }
-    }
-    public static void solution2(int[] nums, int k) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        for (int num : nums) {
-            map.put(num, map.getOrDefault(num, 0) + 1);
-        }
-        PriorityQueue<Num> pq = new PriorityQueue<>();
-        for(Map.Entry<Integer, Integer> item : map.entrySet()) {
-            pq.add(new Practice3().new Num(item.getKey(), item.getValue()));
-        }
-        for (int i = 0; i < k; i++) {
-            Num n = pq.poll();
-            System.out.print(n.data+" ");
-        }
-        System.out.println();
     }
 
     public static void main(String[] args) {
