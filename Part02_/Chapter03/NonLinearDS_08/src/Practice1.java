@@ -73,23 +73,23 @@ class MinHeap{
 
 public class Practice1 {
     public static void solution(MinHeap minHeap, int from, int to) {
+
         for (int i = 0; i < minHeap.heap.size(); i++) {
             if (minHeap.heap.get(i) == from) {
                 minHeap.heap.set(i, to);
-
                 moveUp(minHeap, i);
                 moveDown(minHeap, i);
             }
         }
+
     }
     public static void moveUp(MinHeap minHeap, int idx) {
         int cur = idx;
 
-        while (cur > 1 && minHeap.heap.get(cur / 2) > minHeap.heap.get(cur)) {
-            int parentVal = minHeap.heap.get(cur / 2);
+        while (cur > 1 && minHeap.heap.get(cur) < minHeap.heap.get(cur / 2)) {
+            int parentVal = minHeap.heap.get(cur/2);
             minHeap.heap.set(cur / 2, minHeap.heap.get(cur));
             minHeap.heap.set(cur, parentVal);
-
             cur /= 2;
         }
     }

@@ -19,7 +19,7 @@ class Num {
 }
 
 class MaxHeap2 {
-    ArrayList<Num> heap;
+    ArrayList <Num> heap;
 
     public MaxHeap2() {
         this.heap = new ArrayList<>();
@@ -29,40 +29,39 @@ class MaxHeap2 {
     public void insert(int data) {
         this.heap.add(new Num(data));
 
-        int cur = this.heap.size() - 1;
-        while(cur > 1 && this.heap.get(cur / 2).val < this.heap.get(cur).val) {
+        int cur = heap.size() - 1;
+        while(cur > 1 && this.heap.get(cur).val > this.heap.get(cur / 2).val) {
             Num parentVal = this.heap.get(cur / 2);
-            this.heap.set(cur / 2, this.heap.get(cur));
-            this.heap.set(cur , parentVal);
+            this.heap.set(cur / 2, heap.get(cur));
+            this.heap.set(cur, parentVal);
 
             cur /= 2;
         }
     }
+
     public Num delete() {
         if (this.heap.size() == 1) {
-            System.out.println("Heap is Empty !");
+            System.out.println("Heap is Empty");
             return null;
         }
         Num target = this.heap.get(1);
-
-        this.heap.set(1, heap.get(this.heap.size() - 1));
+        this.heap.set(1, this.heap.get(this.heap.size() - 1));
         this.heap.remove(this.heap.size() - 1);
 
         int cur = 1;
         while(true) {
-            int leftIdx = cur * 2;
-            int rightIdx = cur * 2 + 1;
+            int left = cur * 2;
+            int right = cur * 2 + 1;
             int targetIdx = -1;
-
-            if(rightIdx < this.heap.size()) {
-                targetIdx = this.heap.get(leftIdx).val > this.heap.get(rightIdx).val ? leftIdx : rightIdx;
-            } else if(leftIdx < this.heap.size()) {
-                targetIdx = leftIdx;
+            if (right < this.heap.size()) {
+                targetIdx = this.heap.get(left).val > this.heap.get(right).val ? left : right;
+            } else if (left < this.heap.size()) {
+                targetIdx = left;
             } else {
                 break;
             }
 
-            if (this.heap.get(cur).val < this.heap.get(targetIdx).val) {
+            if (this.heap.get(targetIdx).val > this.heap.get(cur).val) {
                 Num parentVal = this.heap.get(cur);
                 this.heap.set(cur, this.heap.get(targetIdx));
                 this.heap.set(targetIdx, parentVal);
@@ -77,16 +76,16 @@ class MaxHeap2 {
 public class Practice3 {
     public static void solution(int[] nums, int deleteCnt) {
         MaxHeap2 maxHeap = new MaxHeap2();
+
         IntStream.of(nums).forEach(x -> maxHeap.insert(x));
 
-        int cnt = 0;
+        int cnt = 0; //지우는 횟수count
         while (maxHeap.heap.size() != 1) {
             Num cur = maxHeap.delete();
 
             if (cnt++ < deleteCnt) {
                 continue;
             }
-
             int oriVal = cur.isMinus ? cur.val * -1 : cur.val;
             System.out.print(oriVal + " ");
         }

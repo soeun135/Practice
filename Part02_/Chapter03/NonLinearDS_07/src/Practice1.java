@@ -12,12 +12,12 @@ class MaxHeap {
     }
 
     public void insert(int data) {
-        heap.add(data);
+        this.heap.add(data);
 
-        int cur = heap.size() - 1; //현재 새로 추가한 노드의 인덱스
-        while(cur > 1 && heap.get(cur / 2) < heap.get(cur)) {//부모보다 자식이 크면
-            int parentVal = heap.get(cur / 2);
-            heap.set(cur / 2, data);
+        int cur = heap.size() - 1;
+        while (cur > 1 && heap.get(cur) > heap.get(cur/2)) {
+            int parentVal = heap.get(cur/2);
+            heap.set(cur/2, data);
             heap.set(cur, parentVal);
 
             cur /= 2;
@@ -25,7 +25,7 @@ class MaxHeap {
     }
 
     public Integer delete() {
-        if (this.heap.size() == 1) {
+        if (heap.size() == 1) {
             System.out.println("Heap is Empty !");
             return null;
         }
@@ -33,21 +33,21 @@ class MaxHeap {
 
         heap.set(1, heap.get(heap.size() - 1));
         heap.remove(heap.size() - 1);
-
         int cur = 1;
         while(true) {
-            int leftIdx = cur * 2;
-            int rightIdx = cur * 2 + 1;
+            int left = cur * 2;
+            int right = cur * 2 + 1;
             int targetIdx = -1;
 
-            if(rightIdx < heap.size()) { //왼쪽 오른쪽 자식이 모두 존재
-                targetIdx = heap.get(leftIdx) > heap.get(rightIdx) ? leftIdx : rightIdx;
-            } else if (leftIdx < heap.size()) { //자식이 하나만 존재
-                targetIdx = leftIdx;
-            } else { //자식이 없는 경우
+            if (right < heap.size()) {
+                targetIdx = heap.get(left) > heap.get(right) ? left : right;
+            } else if (left < heap.size()) {
+                targetIdx = left;
+            } else {
                 break;
             }
-            if(heap.get(cur) < heap.get(targetIdx)) {
+
+            if (heap.get(targetIdx) > heap.get(cur)) {
                 int parentVal = heap.get(cur);
                 heap.set(cur, heap.get(targetIdx));
                 heap.set(targetIdx, parentVal);

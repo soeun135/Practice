@@ -77,18 +77,17 @@ public class Practice2 {
         MaxHeap maxHeap = new MaxHeap();
 
         System.out.print("오름차순 : ");
-
-        while(minHeap.heap.size() != 1) {
-            int data = minHeap.delete();
-            System.out.print(data + " ");
-            maxHeap.insert(data);
+        while (minHeap.heap.size() != 1) {
+            int num = minHeap.delete();
+            System.out.print(num  + " ");
+            maxHeap.insert(num);
         }
         System.out.println();
 
         System.out.print("내림차순 : ");
-        while(maxHeap.heap.size() != 1) {
-            int data = maxHeap.delete();
-            System.out.print(data + " ");
+        while (maxHeap.heap.size() != 1) {
+            int num = maxHeap.delete();
+            System.out.print(num + " ");
         }
     }
 
