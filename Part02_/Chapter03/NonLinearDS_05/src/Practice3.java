@@ -8,23 +8,22 @@ class MyGraphList2 extends MyGraphList{
     public MyGraphList2(int size) {
         super(size);
     }
-
     public void dfs(int id) {
-        //배열과 스택을 이용하여 구현
-        boolean []visited = new boolean[this.elemCnt];
+        //배열, 스택으로 구현
         Stack <Integer> stack = new Stack<>();
+        boolean visited[] = new boolean[this.elemCnt];
 
         stack.push(id);
         visited[id] = true;
 
-        while(!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             int curId = stack.pop();
+
             System.out.print(this.vertices[curId] + " ");
 
             Node cur = this.adjList[curId];
-
-            while(cur != null) {
-                if (visited[cur.id] == false) {
+            while (cur != null) {
+                if (!visited[cur.id]) {
                     stack.push(cur.id);
                     visited[cur.id] = true;
                 }
@@ -35,26 +34,26 @@ class MyGraphList2 extends MyGraphList{
     }
 
     public void bfs(int id) {
-        boolean []visited = new boolean[this.elemCnt];
-        Queue<Integer> q = new LinkedList<>();
+        Queue <Integer> q = new LinkedList<>();
+        boolean visited[] = new boolean[this.elemCnt];
 
         q.offer(id);
         visited[id] = true;
 
         while(!q.isEmpty()) {
             int curId = q.poll();
+            System.out.print(this.vertices[curId] + " ");
 
-            System.out.print(this.vertices[curId]+" ");
             Node cur = this.adjList[curId];
             while(cur != null) {
-                if(!visited[cur.id]) {
+                if (!visited[cur.id]) {
                     q.offer(cur.id);
                     visited[cur.id] = true;
                 }
                 cur = cur.next;
             }
         }
-        System.out.println();
+        System.out.println(  );
     }
 }
 

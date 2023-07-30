@@ -14,19 +14,21 @@
 
 public class Practice3 {
     public static void solution(int[][] graph) {
-        int[] flags = new int[graph.length]; //그래프에 각 노드의 간선 정보가저장되어있음
+        int []flags = new int[graph.length];
 
-        if (checkSplit(graph, flags, 1, 0) == true){
+        if (checkSplit(graph, flags, 1, 0)) {
             System.out.println("true");
-        } else System.out.println("false");
+        } else {
+            System.out.println("false");
+        }
     }
 
-    public static boolean checkSplit(int [][]graph, int[]flags, int flag, int node) {
-        if (flags[node] != 0) {
+    public static boolean checkSplit(int[][] graph, int[] flags, int flag, int node) {
+        if (flags[node] != 0) { //이미 값이 들어있는 경우에
             return flags[node] == flag;
         }
+        flags[node] = flag;
 
-        flags[node] = flag; // 1로 맨 처음 노드의 flag 설정
         for (int adjacentNode : graph[node]) {
             if (!checkSplit(graph, flags, -flag, adjacentNode)) {
                 return false;
@@ -34,7 +36,6 @@ public class Practice3 {
         }
         return true;
     }
-
     public static void main(String[] args) {
         // Test code
         int[][] graph = {{1, 3}, {0, 2}, {1, 3}, {0, 2}};

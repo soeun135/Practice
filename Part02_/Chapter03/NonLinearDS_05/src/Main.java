@@ -2,47 +2,45 @@
 // 인접 행렬을 이용한 그래프 구현
 
 class MyGraphMatrix {
-    char []vertices; //정점들 배열
-    int[][] adjMat; //인접행렬
-    int elemCnt; //그래프의 정점 갯수 셀 변수
+     char []vertices;
+     int [][]adjMat;
+     int elemCnt;
 
-    public MyGraphMatrix() {}
-    public MyGraphMatrix(int size){
+     public MyGraphMatrix() {}
+    public MyGraphMatrix(int size) {
         this.vertices = new char[size];
         this.adjMat = new int[size][size];
         this.elemCnt = 0;
     }
 
-    public boolean isFull(){
-        return this.elemCnt == this.vertices.length;
+    public boolean isFull() {
+         return this.elemCnt == this.vertices.length;
     }
 
-    public void addVertex(char data){
-        if(isFull()) {
-            System.out.println("Graph is full !");
-            return;
-        }
-
-        this.vertices[this.elemCnt++] = data;
+    public void addVertex(char data) {
+         if (isFull()) {
+             System.out.println("Graph is Full !");
+             return;
+         }
+         this.vertices[this.elemCnt++] = data;
     }
 
-    public void addEdge(int x, int y) {
-        this.adjMat[x][y] = 1;
-        this.adjMat[y][x] = 1;
+    public void addEdge(int i, int j) {
+         this.adjMat[i][j] = 1;
+         this.adjMat[j][i] = 1;
+    }
+    public void addDirectedEdge(int i, int j) {
+         this.adjMat[i][j] = 1;
+    }
+    public void deleteEdge(int i, int j) {
+        this.adjMat[i][j] = 0;
+        this.adjMat[j][i] = 0;
     }
 
-    public void addDirectedEdge(int x, int y) {
-        this.adjMat[x][y] = 1;
+    public void deleteDirectedEdge(int i, int j) {
+         this.adjMat[i][j] = 0;
     }
 
-    public void deleteEdge(int x, int y){
-        this.adjMat[x][y] = 0;
-        this.adjMat[y][x] = 0;
-    }
-
-    public void deleteDirectedEdge(int x, int y) {
-        this.adjMat[x][y] = 0;
-    }
     public void printAdjacentMatrix() {
         System.out.print("  ");
         for (char item : this.vertices) {
@@ -53,7 +51,7 @@ class MyGraphMatrix {
         for (int i = 0; i < this.elemCnt; i++) {
             System.out.print(this.vertices[i] + " ");
             for (int j = 0; j < this.elemCnt; j++) {
-                System.out.print(this.adjMat[i][j]+ " ");
+                System.out.print(this.adjMat[i][j] + " ");
             }
             System.out.println();
         }

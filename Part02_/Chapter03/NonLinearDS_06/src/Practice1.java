@@ -54,23 +54,23 @@ public class Practice1 {
         for (int i = 0; i < e.length; i++) { //간선정보 저장
             graph.addEdge(e[i][0] - 1,e[i][1] - 1);
         }
-        int edgeCnt[] = new int[e.length + 1];
-        for (int i = 0; i < graph.adjMat.length ; i++) {
+        int []edgeCnt = new int[e.length + 1];
+        for (int i = 0; i < graph.adjMat.length; i++) {
             for (int j = 0; j < graph.adjMat[i].length; j++) {
-                if(graph.adjMat[i][j] == 1) {
-                    edgeCnt[i] ++;
+                if (graph.adjMat[i][j] == 1) {
+                    edgeCnt[i] += 1;
                 }
             }
         }
         int maxCnt = -1;
         int maxIdx = -1;
         for (int i = 0; i < edgeCnt.length; i++) {
-            if(maxCnt < edgeCnt[i]) {
+            if (maxCnt < edgeCnt[i]) {
                 maxCnt = edgeCnt[i];
-                maxIdx = (i + 1);
+                maxIdx = i;
             }
         }
-        return maxIdx;
+        return maxIdx + 1;
     }
 
     public static int solution2(int[][] e) {

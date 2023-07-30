@@ -6,43 +6,47 @@ import java.util.Queue;
 import java.util.Stack;
 
 class MyGraphMatrix2 extends MyGraphMatrix{
+    public MyGraphMatrix2() {}
 
     public MyGraphMatrix2(int size) {
         super(size);
     }
 
     public void dfs(int id) {
+        Stack <Integer> stack = new Stack<>();
         boolean visited[] = new boolean[this.elemCnt];
-        Stack <Integer> stack = new Stack();
 
-        stack.push(id); //순회 시작하려는 값 부터 stack에 push
+        stack.push(id);
         visited[id] = true;
 
         while(!stack.isEmpty()) {
             int curId = stack.pop();
             System.out.print(this.vertices[curId] + " ");
-            for (int i = this.elemCnt - 1; i >= 0; i--) {
-                if(this.adjMat[curId][i] == 1 && !visited[i]) {
+
+            //for (int i = this.elemCnt - 1; i >= 0; i--) {
+            for (int i = 0 ; i < this.elemCnt ; i ++){
+                if (this.adjMat[curId][i] == 1 && !visited[i]) {
                     stack.push(i);
                     visited[i] = true;
                 }
             }
         }
         System.out.println();
+
     }
 
     public void bfs(int id) {
-        boolean []visited = new boolean[this.elemCnt];
-        Queue<Integer> q = new LinkedList();
-
+        boolean visited[] = new boolean[this.elemCnt];
+        Queue <Integer> q = new LinkedList<>();
+        
         q.offer(id);
         visited[id] = true;
-
+        
         while(!q.isEmpty()) {
             int curId = q.poll();
             System.out.print(this.vertices[curId] + " ");
             for (int i = this.elemCnt - 1; i >= 0; i--) {
-                if(this.adjMat[curId][i] == 1 && !visited[i]) {
+                if (this.adjMat[curId][i] == 1 && !visited[i]) {
                     q.offer(i);
                     visited[i] = true;
                 }

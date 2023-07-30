@@ -10,14 +10,14 @@ class Node {
         this.next = next;
     }
 }
-
 class MyGraphList {
-    char []vertices;
+    char[] vertices;
     Node[] adjList;
     int elemCnt;
-    public MyGraphList() {}
+
+    public MyGraphList(){}
     public MyGraphList(int size) {
-        this.vertices= new char[size];
+        this.vertices = new char[size];
         this.adjList = new Node[size];
         this.elemCnt = 0;
     }
@@ -25,9 +25,8 @@ class MyGraphList {
     public boolean isFull() {
         return this.elemCnt == this.vertices.length;
     }
-
     public void addVertex(char data) {
-        if(isFull()) {
+        if (isFull()) {
             System.out.println("Graph is Full !");
             return;
         }
@@ -39,13 +38,13 @@ class MyGraphList {
         this.adjList[y] = new Node(x, this.adjList[y]);
     }
 
-    public void addDirectEdge(int x, int y){
+    public void addDirectedEdge(int x, int y) {
         this.adjList[x] = new Node(y, this.adjList[x]);
     }
 
     public void printAdjacentList() {
         for (int i = 0; i < this.elemCnt; i++) {
-            System.out.print(this.vertices[i] + ": ");
+            System.out.print(this.vertices[i] + " :");
 
             Node cur = this.adjList[i];
             while(cur != null) {

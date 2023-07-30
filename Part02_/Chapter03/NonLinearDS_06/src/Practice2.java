@@ -56,62 +56,41 @@ class MyGraphList {
 public class Practice2 {
     public static void solution(int n, int[][] edges, int source, int dest) {
         MyGraphList list = new MyGraphList(n);
-        for (int i = 0; i < n; i++) {
-            list.addVertex(i); //노드 정보 저장
+        for (int i = 0; i < n; i++) { //노드정보 저장
+            list.addVertex(i);
         }
         for (int i = 0; i < edges.length; i++) { //간선정보 저장
-                list.addEdge(edges[i][0],edges[i][1]);
+            list.addEdge(edges[i][0],edges[i][1]);
         }
 
-        //강사님은 이렇게 하셨다 dfs함수 만들어서
-        ArrayList<Integer> visitedItem = new ArrayList<>();
-        dfs(list, 0, visitedItem);
 
-        if(visitedItem.contains(dest) && visitedItem.contains(source)) System.out.println("true");
-        else System.out.println("false");
-        //dfs 탐색 내코드 !!
-//        boolean visited[] = new boolean[n];
-//        Stack <Integer>stack = new Stack<>();
-//
-//        stack.push(0);
-//        visited[source] = true;
-//
-//        while(!stack.isEmpty()){
-//            int curId = stack.pop();
-//
-//            if(curId == dest) {
-//                System.out.println("true");
-//                return;
-//            }
-//            Node cur = list.adjList[curId];
-//            while(cur != null) {
-//                if(!visited[cur.id]) {
-//                    stack.push(cur.id);
-//                    visited[cur.id] = true;
-//                }
-//                cur = cur.next;
-//            }
-//        }
-//        System.out.println("false");
+        ArrayList<Integer> visitedItem = new ArrayList<>();
+
+        dfs(list, 0, visitedItem);
+        if (visitedItem.contains(dest) && visitedItem.contains(source)){
+            System.out.println("true");
+        } else {
+            System.out.println("false");
+        }
+
     }
 
     public static void dfs(MyGraphList graph, int id, ArrayList<Integer> visitedItem) {
-        boolean[] visited = new boolean[graph.vertices.length];
         Stack <Integer> stack = new Stack<>();
+        boolean visited[] = new boolean[graph.vertices.length];
 
         stack.push(id);
         visited[id] = true;
-
         while(!stack.isEmpty()) {
             int curId = stack.pop();
 
             visitedItem.add(curId);
 
             Node cur = graph.adjList[curId];
-            while(cur != null) {
-                if(!visited[cur.id]){
+            while (cur != null) {
+                if (!visited[cur.id]) {
                     stack.push(cur.id);
-                    visited[curId] = true;
+                    visited[cur.id] = true;
                 }
                 cur = cur.next;
             }
