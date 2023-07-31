@@ -15,26 +15,25 @@ public class Practice3 {
         for (String str : strs) {
             trie.insert(str);
         }
-
         for (String target : targets) {
             boolean result = examineWord(trie.root, target, 0, false);
-            System.out.println(result + " ");
+            System.out.print(result + " ");
         }
-
+        System.out.println();
     }
 
     public static boolean examineWord(Node node, String target, int i, boolean flag){
-        if (i< target.length()) {
-            if (node.child.containsKey((target.charAt(i)))) {
+        if (i < target.length()) {
+            if (node.child.containsKey(target.charAt(i))) {
                 if (examineWord(node.child.get(target.charAt(i)), target, i + 1, flag)) {
                     return true;
                 }
             }
             if (!flag) {
-                for (char c : node.child.keySet()) { //존재하는 모든 알파벳을 가져와서
+                for (char c : node.child.keySet()) {
                     if (c != target.charAt(i) && examineWord(node.child.get(c), target, i + 1, true)) {
-                        //해당번째 문자와 c가 다르고 examinWord 해봤을 때 나머지 결과가 true면 == 한 문자만 다르고 나머지는 true일 때
-                        return true; //true반환
+                        //한 문자만 다르고 나머지는 true일 때
+                        return true;
                     }
                 }
             }

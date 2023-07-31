@@ -113,14 +113,16 @@ class Trie {
 public class Practice1 {
     public static boolean solution(String[] strs, String prefix) {
         Trie trie = new Trie();
-        for (String str :strs) {
+
+        for (String str : strs) {
             trie.insert(str);
         }
+
         Node cur = trie.root;
         for (int i = 0; i < prefix.length(); i++) {
             char c = prefix.charAt(i);
 
-            if (cur.child.get(c) == null) {
+            if (!cur.child.containsKey(c)) { //처음부터 없으면 false
                 return false;
             }
             cur = cur.child.get(c);
