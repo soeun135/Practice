@@ -11,8 +11,26 @@
 
 public class Practice4 {
     public static int solution(int[] nums) {
-
-        return 0;
+        if (nums == null || nums.length < 2) {
+            return 0;
+        }
+        int min = Integer.MAX_VALUE;
+        int firstIdx = 0;
+        for (int i = nums.length - 1; i >= 0; i--) { //가장 좌측값을 찾을 거임
+            min = Math.min(min, nums[i]);
+            if (nums[i] > min) {
+                firstIdx = i;
+            }
+        }
+        int max = Integer.MIN_VALUE;
+        int lastIdx = -1;
+        for (int i = 0; i < nums.length; i++) {
+            max = Math.max(max, nums[i]);
+            if (max > nums[i]) {
+                lastIdx = i;
+            }
+        }
+        return lastIdx - firstIdx + 1;
     }
 
     public static void main(String[] args) {

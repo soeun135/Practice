@@ -8,11 +8,28 @@
 // 출력: 0, 0, 1, 1, 2, 2
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class Practice1 {
     // 계수 정렬
     public static void solution(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int max = IntStream.of(arr).max().getAsInt();
 
+        int counting[] = new int[max + 1];
+
+        for (int i = 0; i < arr.length; i++) {
+            counting[arr[i]] ++;
+        }
+        int idx = 0;
+        for (int i = 0; i < counting.length; i++) {
+            while (counting[i] > 0) {
+                arr[idx++] = i;
+                counting[i]--;
+            }
+        }
     }
 
     public static void main(String[] args) {

@@ -8,16 +8,68 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class Practice3 {
 
     public static ArrayList<int[]> solution(int[][] intervals) {
+        if (intervals == null || intervals.length < 2) {
+            return new ArrayList<>();
+        }
+        sort(intervals);
 
-        return null;
+        ArrayList <int[]> result = new ArrayList<>();
+        int []curInterval = intervals[0];
+        result.add(curInterval);
+
+        for (int i = 1; i < intervals.length; i++) {
+            if (curInterval[1] >= intervals[i][0]) {
+                curInterval[1] = intervals[i][1];
+            } else {
+                curInterval = intervals[i];
+                result.add(curInterval);
+            }
+        }
+        return result;
     }
 
-    public static void sort(int[][] intervals) {
+    public static void sort(int[][] intervals) { //퀵소트ㅠ
+        quickSort(intervals, 0, intervals.length - 1);
+    }
 
+    public static void quickSort(int [][]arr, int left, int right) {
+        if (left >= right) { //탈출조건
+            return;
+        }
+        int pivot = partition(arr, left, right);
+        quickSort(arr, left, pivot - 1);
+        quickSort(arr, pivot + 1, right);
+    }
+
+    public static int partition(int[][] arr, int left, int right) {
+        int pivot = arr[left][0]; //구간의 첫 번째 값 기준으로 정렬
+        int i = left;
+        int j = right;
+
+        while (i < j) {
+            while (arr[j][0] > pivot && i < j) {
+                j--;
+            }
+            while (arr[i][0] <= pivot && i < j) {
+                i++;
+            }
+
+            swap(arr, i, j);
+        }
+        swap(arr, left, i);
+
+        return i;
+    }
+
+    public static void swap(int arr[][], int i , int j) {
+        int[] tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
     }
 
     public static void main(String[] args) {
