@@ -1,8 +1,12 @@
 public class Main {
 
     public static int getMax(int[] arr, int left, int right) {
+        int mid = (left + right) / 2;
+        if (left == right) return arr[left];
 
-        return 0;
+        left = getMax(arr, left, mid);
+        right = getMax(arr, mid + 1, right);
+        return (left > right) ? left : right;
     }
 
 
