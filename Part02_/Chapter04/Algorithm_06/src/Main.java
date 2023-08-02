@@ -5,13 +5,47 @@ import java.util.Arrays;
 
 public class Main {
     public static int[] forLoop(int[] arr, int target) {
+        int [] result = {-1, -1};
 
-        return null;
+        int total = 0;
+        for (int i = 0; i < arr.length; i++) {
+            int sum = arr[i];
+            for (int j = i + 1 ;  j < arr.length; j++) {
+                if (sum == target) {
+                    result[0] = i;
+                    result[1] = j - 1;
+                    break;
+                }
+                sum += arr[j];
+            }
+            if (sum == target) {
+                break;
+            }
+        }
+        return result;
     }
 
     public static int[] twoPointers(int[] arr, int target) {
+        int p1 = 0;
+        int p2 = 0;
+        int result[] = {-1, -1};
+        int total = 0;
+        while (true) {
+            if (total > target) {
+                total -= arr[p1++];
+            } else if (p2 == arr.length) {
+                break;
+            } else {
+                total += arr[p2++];
+            }
 
-        return null;
+            if (total == target) {
+                result[0] = p1;
+                result[1] = p2 - 1;
+                break;
+            }
+        }
+        return result;
     }
 
     public static void main(String[] args) {

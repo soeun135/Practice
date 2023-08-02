@@ -11,10 +11,23 @@
 // 출력: "java hello"
 
 
+import java.util.Stack;
+
 public class Practice3 {
     public static String solution(String s) {
-
+        if (s == null) {
             return null;
+        }
+
+        if (s.length() < 2) {
+            return s;
+        }
+
+        s = removeSpaces(s);
+        char[] cArr = s.toCharArray();
+        reverseString(cArr, 0, s.length() - 1);
+        reverseWords(cArr, s.length());
+        return new String(cArr);
     }
 
     public static String removeSpaces(String s) {
@@ -25,28 +38,21 @@ public class Practice3 {
         int length = s.length();
 
         while (p2 < length) {
-            // 단어 앞 쪽 공백 skip
             while (p2 < length && cArr[p2] == ' ') {
                 p2++;
             }
-
-            // 공백 아닌 경우 해당 문자로 채워넣기
             while (p2 < length && cArr[p2] != ' ') {
                 cArr[p1++] = cArr[p2++];
             }
 
-            // 단어 뒤쪽 공백 skip
             while (p2 < length && cArr[p2] == ' ') {
                 p2++;
-            }
+            } //while 3번으로 한 단어의 앞뒤 공백을 다 없애줌.
 
-            // 단어와 단어 사이 공백 하나는 추가
-            if (p2 < length) {
+            if (p2 < length) { //단어와 단어 사이에 공백 추가
                 cArr[p1++] = ' ';
             }
         }
-
-        // 공백 정리해서 앞쪽부터 채워넣은 부분 문자열 반환
         return new String(cArr).substring(0, p1);
     }
 
@@ -63,15 +69,12 @@ public class Practice3 {
         int p2 = 0;
 
         while (p1 < length) {
-            // p1, p2 로 공백 제외 단어 부분 시작, 끝 설정
             while (p1 < p2 || p1 < length && cArr[p1] == ' ') {
-                p1++;
+                p1++; //공백인 곳에서 멈춤
             }
-            
-            while (p2 < p1 || p2 < length && cArr[p2] != ' ')  {
+            while (p2 < p1 || p2 < length && cArr[p2] != ' ') {
                 p2++;
             }
-
             reverseString(cArr, p1, p2 - 1);
         }
     }
