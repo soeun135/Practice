@@ -1,9 +1,12 @@
-// 알고리즘 - 그리디 알고리즘
+ // 알고리즘 - 그리디 알고리즘
 // Activity Selection Problem
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
-class Activity {
+ class Activity implements Comparable<Activity> {
     String name;
     int start;
     int end;
@@ -13,12 +16,31 @@ class Activity {
         this.start = start;
         this.end = end;
     }
-}
+
+     @Override
+     public int compareTo(Activity o) {
+         return this.end - o.end ;
+     }
+ }
 
 public class Main {
     public static void selectActivity(ArrayList<Activity> list) {
         // 종료시간 기준 오름차순 정렬
+        //Collections.sort(list, (x, y) -> x.end - y.end);
+        Collections.sort(list);
 
+        int curTime = 0;
+        ArrayList<Activity> result = new ArrayList<>();
+        for (Activity item : list) {
+            if (curTime <= item.start) {
+                curTime = item.end;
+                result.add(item);
+            }
+        }
+        for (Activity item : result) {
+            System.out.print(item.name + " ");
+        }
+        System.out.println();
     }
 
     public static void main(String[] args) {
