@@ -14,10 +14,34 @@
 // 출력: 6
 
 
+import java.util.stream.IntStream;
+
 public class Practice4 {
     public static int solution(int[] weights, int days) {
+        int left = IntStream.of(weights).max().getAsInt(); //최소값 (하나씩 쪼갰을 때 최소 적재량)
+        int right = IntStream.of(weights).sum();
 
-        return 0;
+
+        int max = 0;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            int cnt = 1;
+            int cur = 0;
+
+            for (int w : weights) {
+                if (cur + w > mid) {
+                    cnt += 1;
+                    cur = 0;
+                }
+                cur += w;
+            }
+            if (cnt > days) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
     }
 
     public static void main(String[] args) {

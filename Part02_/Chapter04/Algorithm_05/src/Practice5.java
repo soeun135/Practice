@@ -14,10 +14,36 @@
 // 출력: 9
 
 
+import java.util.stream.IntStream;
+
 public class Practice5 {
     public static int solution(int[] nums, int m) {
+        int left = IntStream.of(nums).max().getAsInt();
+        int right = IntStream.of(nums).sum();
 
-        return 0;
+        if (m == 1) {
+            return right;
+        }
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            int total = 0;
+            int cnt = 1; //mid값을 갖고 나눴을 때 몇 개로 분리되는지
+
+            for (int num : nums) {
+                total += num;
+
+                if (total > mid) {
+                    total = num;
+                    cnt++;
+                }
+            }
+            if (cnt <= m) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return left;
     }
 
     public static void main(String[] args) {
