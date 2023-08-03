@@ -12,15 +12,54 @@
 
 public class Practice3 {
     final static int numOfProblems = 10;
+    static int cnt;
 
     public static void solution(int[] sols) {
         if (sols == null || sols.length != numOfProblems) {
             return;
         }
+        cnt = 0;
+        int []submit = new int[numOfProblems];
 
+        //backTracking()
+        backTracking(sols, submit, 0, 0);
+        System.out.println(cnt);
 
     }
 
+    public static void backTracking(int[] sols, int[] submit, int correctCnt, int idx) {
+        if (numOfProblems - idx + correctCnt < 5) {
+            //전체 문항에서 현재풀고 있는 문제 수를 빼고 거기서 맞은 거만 더했는데 5미만이면
+            return;
+        }
+
+        if (idx == numOfProblems) { //문제 다 풀었을 때
+            if (correctCnt >= 5) { //맞은 갯수가 5이상이면
+                cnt += 1;
+            }
+        } else {
+            int twoInRow = 0; //같은 값을 두 번 썼을 때 체크할 변수
+            if (idx >= 2) {
+                if (submit[idx - 1] == submit[idx - 2]) {
+                    twoInRow = submit[idx - 1];
+                }
+            }
+
+            for (int i = 1; i <= 5; i++) {
+                if (i == twoInRow) {
+                    continue;
+                }
+
+                submit[idx] = i;
+                if (sols[idx] == i) {
+                    backTracking(sols, submit, correctCnt + 1, idx + 1);
+                } else {
+                    backTracking(sols, submit, correctCnt, idx + 1);
+                }
+                submit[idx] = 0;
+            }
+        }
+    }
     public static void main(String[] args) {
         // Test code
         int[] sols = {1, 2, 3, 4, 5, 1, 2, 3, 4, 5};
