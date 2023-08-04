@@ -23,10 +23,10 @@ public class Main {
             graph.get(data[i][0]).add(new Node(data[i][1], data[i][2]));
         }
 
-        int[] dist = new int[v + 1];
+        int[] dist = new int[v + 1]; //최단거리 기록용 메모리
 
         for (int i = 1; i < v + 1; i++) {
-            dist[i] = Integer.MAX_VALUE;
+            dist[i] = Integer.MAX_VALUE; //INF값으로 초기화
         }
         dist[start] = 0;
 
@@ -43,7 +43,7 @@ public class Main {
             }
             visited[curIdx] = true;
 
-            for (int j = 0; j < graph.get(curIdx).size(); j++) {
+            for (int j = 0; j < graph.get(curIdx).size(); j++) { //선택된 노드의 인접노드 거리 갱신
                 Node adjNode = graph.get(curIdx).get(j);
                 if (dist[adjNode.to] > dist[curIdx] + adjNode.weight) {
                     dist[adjNode.to] = dist[curIdx] + adjNode.weight;

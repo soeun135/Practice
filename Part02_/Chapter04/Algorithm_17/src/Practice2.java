@@ -34,12 +34,40 @@ public class Practice2 {
     static int[] dist;
 
     public static void solution(int n, int m, int w, int[][] portal, int[][] wormhole) {
-
+        edge = new Edge[m + w]; //포탈이 m개 웜홀이 w개
+        for (int i = 0; i < m; i++) {
+            edge[i] = new Edge(portal[i][0], portal[i][1], portal[i][2]);
+        }
+        for (int i = 0; i < w; i++) {
+            edge[m + i] = new Edge(wormhole[i][0], wormhole[i][1], -wormhole[i][2]);
+        }
+        dist = new int[n + 1];
+        for (int i = 0; i < n + 1; i++) {
+            dist[i] = INF;
+        }
+        dist[1] = 0;
+        System.out.println(bellmanFord(n, m + w));
     }
 
     public static boolean bellmanFord(int v, int e) {
+        boolean isMinusCycle = false; //음수사이클 체크 변수
+        for (int i = 0; i < v + 1; i++) { //매 노드 돌 때마다
+            for (int j = 0; j < e; j++) { //모든 간선에 대해 체크
+                Edge cur = edge[j];
 
-        return false;
+                if (dist[cur.from] == INF) {
+                    continue;
+                }
+                if (dist[cur.to] > dist[cur.from] + cur.weight) {
+                    dist[cur.to] = dist[cur.from] + cur.weight;
+
+                    if (i == v) {
+                        isMinusCycle = true;
+                    }
+                }
+            }
+        }
+        return isMinusCycle;
     }
 
     public static void main(String[] args) {
