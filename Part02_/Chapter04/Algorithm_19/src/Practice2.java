@@ -18,12 +18,65 @@
 // 출력: 8
 
 
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+
 public class Practice2 {
+    static class Node {
+        int to;
+        int weight;
 
-    public static void solution(int v, int e, int[][] data) {
-
+        public Node(int to, int weight) {
+            this.to = to;
+            this.weight = weight;
+        }
     }
 
+    static ArrayList<Node>[] graph;
+    static boolean visited[];
+    public static void solution(int v, int e, int[][] data) {
+        graph = new ArrayList[v + 1];
+        for (int i = 1; i < v + 1; i++) {
+            graph[i] = new ArrayList<>();
+        }
+
+        for (int i = 0; i < e; i++) {
+            graph[data[i][0]].add(new Node(data[i][1], data[i][2]));
+            graph[data[i][1]].add(new Node(data[i][2], data[i][2]));
+        }
+        visited = new boolean[v + 1];
+        //prim
+        System.out.println(prim());
+    }
+
+    public static int prim() {
+        PriorityQueue <Node> pq = new PriorityQueue<>((x, y) -> x.weight - y.weight);
+        pq.offer(new Node(1, 0));
+
+        int weightSum = 0;
+        int maxWeight = 0;
+        while (!pq.isEmpty()) {
+            Node cur = pq.poll();
+
+            if (visited[cur.to]) {
+                continue;
+            }
+            visited[cur.to] = true;
+            weightSum += cur.weight;
+
+            maxWeight = Math.max(maxWeight, cur.weight);
+
+            for (int i = 0; i < graph[cur.to].size(); i++) {
+                Node adjNode = graph[cur.to].get(i);
+
+                if (visited[adjNode.to]) {
+                    continue;
+                }
+                pq.offer(adjNode);
+            }
+        }
+        return weightSum - maxWeight;
+    }
     public static void main(String[] args) {
         // Test code
         int v = 7;

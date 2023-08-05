@@ -1,15 +1,47 @@
 // 알고리즘 - 최소 신장 트리
 // 크루스칼 알고리즘
 
+import java.util.Arrays;
+
 public class Main {
+
+    static int parents[];
 
     public static int kruskal(int[][] data, int v, int e) {
         int weightSum = 0;
 
+        Arrays.sort(data, (x, y) -> x[2] - y[2]); //가중치 기준 오름차순 정렬
+
+        parents = new int[v + 1];
+        for (int i = 1; i < v + 1; i++) {
+            parents[i] = i;
+        }
+
+        for (int i = 0; i < e; i++) { //간선들을 작은순서대로 넘겨서 사이클 발생하면 넘기고 아니면 연결
+            if (find(data[i][0]) != find(data[i][1])) {
+                union(data[i][0], data[i][1]);
+                weightSum += data[i][2];
+            }
+        }
 
         return weightSum;
     }
 
+    public static void union (int a, int b) { //연결이 됐을 때 두 개의 노드를 같은 집합으로 묶어주는 메소드
+         int aP = find(a);
+         int bP = find(b);
+
+         if (aP != bP) {
+             parents[aP] = bP; //같은 부모가 되도록 연결해주는 작업
+         }
+    }
+
+    public static int find(int a) { //a라는 노드가 최종적으로 어디 연결 돼있는지 찾아주는 메소드 => 싸이클 체크
+         if (a == parents[a]) {
+             return a;
+         }
+         return parents[a] = find(parents[a]);
+    }
     public static void main(String[] args) {
         // Test code
         int v = 7;
