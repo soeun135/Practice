@@ -25,6 +25,7 @@ public class Practice3 {
 
         s = removeSpaces(s);
         char[] cArr = s.toCharArray();
+        System.out.println(cArr.length);
         reverseString(cArr, 0, s.length() - 1);
         reverseWords(cArr, s.length());
         return new String(cArr);

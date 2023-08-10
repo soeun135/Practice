@@ -18,6 +18,7 @@ public class Practice1 {
     public static boolean solution(int[] nums) {
         int pos = 0; //첫 위치
         for (int i = 0; i < nums.length; i++) {
+            System.out.println(pos);
             if (pos < i) {
                 return false;
             } else if (pos >= nums.length - 1) {

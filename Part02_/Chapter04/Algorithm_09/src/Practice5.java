@@ -9,6 +9,8 @@
 // 입력: 7116
 // 출력: 7611
 
+import java.util.Arrays;
+
 public class Practice5 {
     public static int solution(int num) {
         char[] cArr = String.valueOf(num).toCharArray();
@@ -19,8 +21,11 @@ public class Practice5 {
             max = Math.max(max, cArr[i] - '0');
             maxArr[i] = max;
         }
+        System.out.println(Arrays.toString(cArr));
+        System.out.println(Arrays.toString(maxArr));
         for (int i = 0; i < cArr.length - 1; i++) {
-            if (cArr[i] - '0' < maxArr[i + 1]) {
+            if (cArr[i] - '0' < maxArr[i + 1]) { //왜 여기가 i + 1인지 모르겠다
+                System.out.println(cArr[i] - '0' + " " + maxArr[i + 1]);
                 for (int j = cArr.length - 1; j >= i + 1; j--) {
                     if (cArr[j] - '0' == maxArr[i + 1]) {
                         char tmp = cArr[j];

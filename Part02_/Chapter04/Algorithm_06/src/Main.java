@@ -35,7 +35,7 @@ public class Main {
                 total -= arr[p1++];
             } else if (p2 == arr.length) {
                 break;
-            } else {
+            } else { //total < target
                 total += arr[p2++];
             }
 
