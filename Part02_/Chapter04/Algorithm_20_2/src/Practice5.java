@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.PriorityQueue;
 
 public class Practice5 {
     static class Node {
@@ -11,11 +14,35 @@ public class Practice5 {
     }
 
     static boolean[] visited;
+    static ArrayList<Node>[] graph;
 
     public static int solution(int[][] points) {
         visited = new boolean[points.length];
+        PriorityQueue <Node>pq = new PriorityQueue<>((x, y) -> x.weight - y.weight);
+        pq.offer(new Node(0, 0));
 
-        return 0;
+        int weightSum = 0;
+        int cnt = 0;
+
+        while (cnt < points.length) {
+            Node cur = pq.poll();
+
+            if (visited[cur.idx]) {
+                continue;
+            }
+            visited[cur.idx] = true;
+            weightSum += cur.weight;
+            cnt++;
+
+            for (int i = 0; i < points.length; i++) {
+                if (i == cur.idx) { //i가 자기 자신일 때는 맨해튼 거리 안 구함
+                    continue;
+                }
+                int distance = Math.abs(points[i][0] - points[cur.idx][0]) + Math.abs(points[i][1] - points[cur.idx][1]);
+                pq.offer(new Node(i, distance));
+            }
+        }
+        return weightSum;
     }
 
     public static void main(String[] args) {

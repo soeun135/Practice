@@ -1,8 +1,18 @@
+import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class Practice3 {
     public static int solution(int[] weights) {
+        Arrays.sort(weights);
 
-        return 0;
+        int cur = 0;
+        for (int i = 0; i < weights.length; i++) {
+            if (cur + 1 < weights[i]) {
+                break;
+            }
+            cur += weights[i];
+        }
+        return cur + 1;
     }
 
     public static void main(String[] args) {
